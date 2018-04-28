@@ -1,0 +1,152 @@
+
+<br><br><br><br><br><br>	<link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+
+	<div class="row" style="margin-top: 20px;">
+	<div class="col s12 m6 offset-m3 l4 offset-l4">
+
+		<div class="card">
+			<div class="card-content">
+
+				<?php
+	            $form = $this->loginForm;
+	            $form->prepare();
+	            echo $this->form()->openTag($form);
+	            echo $this->formRow($form->get('loginCsrf'));
+	            ?>
+
+	            	<div class="row">
+						<div class="col s12 m12 l12 center">
+    						<img class="responsive-img" src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="logo-pegalinas" />
+						</div>
+						<div class="col s12 m12 l12 center">
+							<p class="center-align grey-text text-darken-3">Recupera, el camino m&aacute;s corto entre tus objetos perdidos y t&uacute;</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<i class="material-icons prefix">account_circle</i>
+		          			<?php echo $this->formElement($form->get('email_user')); ?>
+		          			<label for="email_user">Correo electr&oacute;nico</label>
+		        		</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<i class="material-icons prefix">lock</i>
+		          			<?php echo $this->formElement($form->get('password_user')); ?>
+		          			<label for="password_user">Contrase&ntilde;a</label>
+		        		</div>
+					</div>
+
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<button class="waves-effect waves-light btn-large blue col s12 m12 l12">Ingresar</button>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col s6 m6 l6">
+							<p class="left-align" style="font-size:25px;">
+								<a href="<?php echo $this->basePath('/users/register'); ?>">
+								¡Reg&iacute;strate ahora!</a>
+							</p>
+						</div>
+						<div class="col s6 m6 l6">
+							<p class="right-align" style="font-size:25px;">
+								<a href="<?php echo $this->basePath('/auth/forgot-password'); ?>">¿Olvidaste tu contrase&ntilde;a?</a>
+							</p>
+						</div>
+					</div>
+
+	            <?php echo $this->form()->closeTag($form); ?>
+
+			</div>
+		</div>
+
+	</div>
+	</div>
+
+
+	<script>
+
+	// BasePath
+	var $basePath           = '<?php echo $this->basePath(); ?>';
+
+	// Formulario
+	var $form_auth          = $("#loginForm");
+
+	// Campo email
+	var $email_user         = $("#email_user");
+
+	// Campo contrasena
+	var $password_user      = $("#password_user");
+
+	// Cuando el documento esta listo
+	// ******************************************************************
+		// Validamos el formulario de inicio de sesion
+		// ******************************************************************
+		$form_auth.validetta({
+        	bubblePosition: 'bottom',
+        	bubbleGapTop: 10,
+        	bubbleGapLeft: 5,
+        	realTime : true,
+        	onValid : function( event ) {
+
+        		event.preventDefault();
+
+        		$.ajax({
+        			url: $basePath + '/auth/login',
+        			type: 'POST',
+        			dataType: 'json',
+        			data: $(this.form).serialize(),
+        		})
+        		.done(function(response) {
+        			console.log(JSON.stringify(response));
+
+        			//console.log("success");
+        			// VALIDAMOS EL CODIGO DE AUTENTICACION
+        			if (response.data.code == 1) {
+
+        				// VALIDAMOS EL TIPO DE PERFIL
+        				if(response.data.perfil == 1){
+        					localStorage.setItem("type_user","personal");
+
+        					// Redirigimos a la lista de articulos
+        					window.location = $basePath + '/articles';
+
+        				}
+        				else if(response.data.perfil == 2){
+                       
+                       localStorage.setItem("type_user","institucion");
+
+        					// Redirigimos a la lista de articulos encontrados
+        					window.location = $basePath + '/articles/findarticles';
+
+        				}
+        				
+        			} else {
+        				swal(
+		  					'Opsss..',
+		  					'¡Credenciales invalidas!',
+		  					'error'
+						);
+        			}
+
+        		})
+        		.fail(function() {
+        			console.log("error");
+        		})
+        		.always(function() {
+        			console.log("complete");
+        		});
+        		
+
+        	}
+    	});
+
+
+		</script>

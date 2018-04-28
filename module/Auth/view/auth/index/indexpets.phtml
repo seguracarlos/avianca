@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <style>
+        .block_br {
+    background: #74C1DC none repeat scroll 0 0;
+}
+
+    hr { 
+   border-top: 2px solid #03a9f4; 
+   border-bottom: 2px solid #8cb400; 
+   border-left:none; 
+   border-right:none; 
+   height: 6px; 
+ } 
+
+
+/*h1.textpets{font-size:100px;}*/
+
+/*h3.textpets{font-size:80px;*/
+}
+
+
+    </style>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+     <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+     <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+        <meta name="application-name" content="Volkan"/>
+
+        <!-- Title -->
+        <title>Recupera by Pegalinas</title> 
+
+  <meta property="og:url"           content="https://recupera.net/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Recupera" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="https://media.licdn.com/media/p/5/000/25b/04a/06e04c0.png" rel="image_src"/>
+</head>
+
+   
+
+    <body>
+
+
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=1822789111305850";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<style>
+  .fb-share-button
+{
+transform: scale(1.5);
+-ms-transform: scale(1.5);
+-webkit-transform: scale(1.5);
+-o-transform: scale(1.5);
+-moz-transform: scale(1.5);
+transform-origin: top left;
+-ms-transform-origin: top left;
+-webkit-transform-origin: top left;
+-moz-transform-origin: top left;
+-webkit-transform-origin: top left;
+}
+
+.video {
+   position: relative;
+   padding-bottom: 56.25%;
+   overflow: hidden;
+}
+.video iframe
+
+ {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+blockquote {
+  padding: 3px 10px;
+  border: #ff4081 5px solid;
+  border-radius: 20px;
+  background: #ff4081;+
+}
+
+
+  </style>
+
+
+        <!-- Scroll-to-top Button -->
+        <div class="scroll-to-top waves-effect waves-light trans-effect">
+            <a href="#"><i class="ion-chevron-up"></i></a>
+        </div><!-- Scroll-to-top Button ends -->
+
+        <!-- Section home -->
+        <section id="home" class="home-sectiontwo" style="margin-top:70px">
+            <div class="overlay-shad"></div>
+
+            <div class="container">
+                <div class="row btm-mrgn-0">
+
+                    <div class="col s12 m8 l8">
+
+
+                    <!--<center>
+                        <img src="<?php echo $this->basePath('img/pets/allandone1250x800.png'); ?>" style="130%; height: 410px; display:none;" class="responsive-img" alt="dog"  style="margin-top:30px;" /> </center>
+                        
+                        <center>
+
+                        
+                        <center>
+                        <img src="<?php echo $this->basePath('img/pets/perrogato.png'); ?>" style="130%; height: 410px;" class="responsive-img" alt="dog"  style="margin-top:30px;" /> </center>-->
+                        <center>
+                        <blockquote style="margin-top:400px;"><font color="white" size="5">
+                            Recupera,el camino más corto entre tus objetos perdidos y tú..
+                       </font> </blockquote> 
+                            <!--<img src="<?php echo $this->basePath('img/pets/plaqueta rosa.png'); ?>" class="responsive-img" alt="plaqueta" style="margin-top:-10px;" />-->
+
+                            <div class="row" style="margin-top:50px;">
+                            
+                                <div class="col s6 m4 l4">
+                                    <a href="https://play.google.com/store/apps/details?id=com.pegalinas.recupera" class="right" target="_blank">
+                                        <img class="responsive-img" src="<?php echo $this->basePath('/img/pets/Google Play.png') ?>" height="65" width="200" />
+                                    </a>
+                                </div>
+
+                                <div class="col s6 m4 l4">
+                                    <a href="https://appsto.re/i6dX8pj" class="left" target="_blank">
+                                        <img class="responsive-img" src="<?php echo $this->basePath('/img/pets/Apple Store.png') ?>" height="65" width="200" />
+                                    </a>
+                                </div>
+
+                                <div class="col s12 m4 l4">
+                                    <div class="fb-share-button" data-href="https://recupera.net/auth/indexpets" data-layout="button" data-size="large" data-mobile-iframe="true">
+                                        <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frecupera.net%2F&amp;src=sdkpreparse">Compartir</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                           <!-- <div class="row" style="margin-top:75px;">
+                                <div class="col s12 m12 l12">
+                                    <!--<div class="fb-share-button" data-href="http://www.your-domain.com/your-page.html" data-layout="button_count"></div>-->
+                                   <!-- <div class="fb-share-button" data-href="https://recupera.net/" data-layout="button" data-size="large" data-mobile-iframe="true">
+                                        <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frecupera.net%2F&amp;src=sdkpreparse">Compartir</a>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                        </center>
+
+                    </div>
+                        
+                    <div class="col s12 m4 l4">
+                        <div class="android-wrapper trans-effect" style="margin-top:30px;">
+                            <div class="android-inner trans-effect">
+                                <div class="hero-slider">
+                                    <ul class="slides">
+                                        <!-- Replace 'src' attribute with the path to the screenshots  -->
+
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/PantallaHomeRecupera2.png') ?>" alt="Home"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/AcessoMascota.png') ?>" alt="acceso"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8948.PNG') ?>" alt="Mis mascotas"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8992.PNG') ?>" alt="Detalle"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8929.PNG') ?>" alt="Detalle"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8995.JPG') ?>" alt="mensaje"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_9076_2.PNG') ?>" alt="se busca"></li>
+                                       <!-- <li><img src="<?php echo $this->basePath('img/pantallas_pets/notifica ios.jpg') ?>" alt="Notificacion"></li>
+                                        <li><img src="<?php echo $this->basePath('img/pantallas_pets/mapa ios.jpg') ?>" alt="Notificacion"></li>-->
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div><!-- Row ends -->
+            </div><!-- Container ends -->
+        </section><!-- Section ends -->
+
+        <!-- Section found -->
+        <div class="row box_anim block_br" style="margin-top:118px;">
+            <div class="col s12 m12 l12" style="margin-top:60px; margin-bottom:50px;">
+
+                <h3 class="center-align"><font color="white">¿Encontraste una mascota perdida y quieres devolverla?</font></h3>
+            
+                <p class="center" >
+                    <a class="btn-link white-text btn-floating waves-light #ff4081 pink accent-2">
+                        <i class="material-icons left">pets</i>
+                    </a>
+                    <font color="white" size="5">Ingresa aquí, el folio del código qr que viene en el tag de la mascota.</font>
+                </p>
+
+                <font color="white">
+                <form id="form_article" method="POST" action="#" class="col s12 m8 offset-m2 l6 offset-l3">            
+                    <div class="row">                
+                        <div class="input-field col s12 m8 l8">
+                            <input id="code_article" type="text" class="validate" name="code_article" data-validetta="required" data-vd-message-required="Ingresa el código del artículo" />
+                            <label for="code_article"><h5><font color="white">Folio QR</font></h5></label>
+                        </div>
+
+                        <div class="input-field col s12 m4 l4">
+                            
+                            <button class="btn-large waves-effect #ff4081 pink accent-2  col s12 m12 l12">Iniciar Devolución
+                                
+                            </button>        
+                        </div>
+                    </div>
+                </form>
+                </font>
+
+            </div>
+        </div>
+
+        <section style="margin-top:70px"><!-- Section -->
+            
+            <div class="container center">
+
+                <div class="row">
+                    <div class="col s12 l8 offset-l2">
+                        <div class="center-heading">
+                            <h5>¡Protege a tu mascota y ayúdala a regresar a casa en caso de que se extravíe y sea encontrada por alguien!</h5><br>
+                            
+                            <p style="text-align: justify">El Tag para mascotas Recupera, funciona a través de la App móvil Pegalinas Recupera, la cual es compatible con los sistemas operativos de Android y IOS. </p></div>
+                            <div class="center-heading">
+                            <p style="text-align: justify"> Funciona de la siguiente manera:
+
+                             1.     Se Descarga la App al Smartphone
+                             2.     Creas una cuenta y activas el Tag al escanear el código QR que viene al reverso para asociarlo
+                             3.     Finalmente completas un perfil para la mascota con su foto y datos generales incluyendo los del veterinario y el chip.<br>
+
+                             En caso de extravío, si alguien encuentra tu mascota, con sólo escanear el código QR, a ti te llegará una alerta a tu teléfono con la ubicación en el mapa a donde se escaneó y los datos de la persona a contactar. Asimismo te llegará un correo electrónico. De esta forma se inicia el proceso de devolución de tu mascota.<b> ¡El uso de la App es completamente gratuito y no hay cargos adicionales!</b> </p>
+                        </div>
+                    </div>
+                </div>
+                     
+                <div class="video">
+                    <!--<iframe  height="360" width="640" src="https://www.youtube.com/embed/twJ_9e0Svv4" frameborder="0" allowfullscreen></iframe>-->
+                    <iframe width="360" height="640" src="https://www.youtube.com/embed/gaHF0RxbxQo" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+
+
+            </div><!-- Container ends -->
+        </section><!-- Section ends -->
+<br><br>
+
+
+                  <div class="row">    
+
+                    <div class="col s12 m3 l3"><font color="white">s</font></div>   
+
+                    <div class="col s12 m3 l3"><h6><center>Hola me llamo Misha</center></h6><br><center><img src="<?php echo $this->basePath('img/pets/Misha_2.png') ?>"alt="tag mascotas" class="phone-wrapper responsive-img"></center></div>
+
+                        
+                        <div class="col s12 m3 l3"><h6><center>Yo soy Niko</center></h6><br><center><img src="<?php echo $this->basePath('img/pets/Niko_2.png') ?>" alt="tag mascotas" class="phone-wrapper responsive-img"></center></div>           
+                      
+                        <div class="col s12 m3 l3"><font color="white">s</font></div>             
+            
+                    </div><!-- Row ends -->
+
+    
+
+        <!-- Section features -->
+        <section id="features" class="featurespets-section sec-padded-1x">
+            <div class="container"><b>
+                <div class="row">
+                    <div class="col s12 l8 offset-l2">
+                        <div class="center-heading">
+                            <h3 class="textpets">¿CÓMO FUNCIONA LA APP MÓVIL?</h3>
+                            <!--<hr>-->
+                            <!--<span class="center-line red"></span>-->
+                            <p><font color="black">Da clic en la imagen del teléfono para que se despliegan algunas pantallas de la App con una breve explicación de su funcionamiento.</font></p>
+                         <!-- <a  href="<?php echo $this->basePath('/Documents/INTRUC MASCOTA PDF.pdf')?>" target="_blank"><font size="4">Ver Instructivo</font></a>-->
+                          <a  href="https://issuu.com/pegalinas.com/docs/instructivo_recupera_mascotas" target="_blank"><font size="4">CÓMO FUNCIONA LA APP – PASO A PASO – RECUPERA MASCOTAS</font></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m4 l4 features-section-row left">
+                        <div class="features-section-box left top one">
+                            <i class="ion-android-download z-depth-1 trans-effect"></i>
+                            <div class="features-text ">
+                                <h4 class="trans-effect">Descarga</h4>
+                                <p style="text-align: justify"><font color="black">La aplicación RECUPERA es GRATUITA para todos los usuarios y está disponible para los sistemas IOS y Android en la tienda de Aplicaciones. Esto facilita que todos participen y ayuden a resolver el problema. Se trata de una verdadera solución colaborativa.</font></p>
+                            </div>
+                        </div><!-- Feature box ends -->
+                        <div class="features-section-box left top two">
+                            <i class="ion-android-contact z-depth-1 trans-effect"></i>
+                            <div class="features-text ">
+                                <h4 class="trans-effect">Registro</h4>
+                                <p style="text-align: justify"><font color="black">Sólo ingresa tu nombre, correo electrónico y contraseña para crear tu cuenta.</font></p>
+                            </div>
+                        </div><!-- Feature box ends -->
+                        <div class="features-section-box left three">
+                            <i class="ion-ios-home z-depth-1 trans-effect"></i>
+                            <div class="features-text ">
+                                <h4 class="trans-effect">Perfil de mascota</h4>
+                                <p style="text-align: justify"><font color="black">El Perfil de tu mascota contiene información clave como su nombre, foto, raza, características especiales, datos del veterinario, etc.</font></p>
+                            </div>
+                        </div><!-- Feature box ends -->                        
+                    </div><!-- Col ends -->
+                    <div class="col s12 m4 l4 features-img-box wow zoomIn" data-wow-delay="0.1s">
+                        <div id="img-wrapper" class="img-wrapper">
+                            <div class="feature-device">
+                                <img src="<?php echo $this->basePath('img/iphone-cover-ios.png') ?>" alt="" class="phone-wrapper responsive-img">
+                                <!-- Replace 'src' attribute with the path to the screenshot  -->
+                                <a href="#"><img class="screen responsive-img" src="<?php echo $this->basePath('img/pantallas_pets/inicio_pets.jpg') ?>" alt=""></a>
+                            </div>
+                            <div class="feature-grid">
+                                <!-- Replace 'src' attribute with the path to the screenshots  -->
+
+                                <a href="#"><img src="<?php echo $this->basePath('img/pantallas_pets/1_Descargar.PNG') ?>" data-num="one" alt="" class="img-responsive"><span>Descarga <small> La aplicación RECUPERA es GRATUITA para todos los usuarios y está disponible para los sistemas IOS y Android.</small></span></a>
+                                <a href="#"><img src="<?php echo $this->basePath('img/pantallas_pets/AcessoMascota.png') ?>" data-num="two" alt="" class="img-responsive"><span>Registro <small>Para unirte a Recupera solo tienes que llenar un pequeño formulario.</small></span></a>
+                                <a href="#"><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8929.PNG') ?>" data-num="three" alt="" class="img-responsive"><span>Perfil de mascota <small>El Perfil de tu mascota contiene información clave como su nombre, foto, raza, características especiales, datos del veterinario, etc.</small></span></a>
+                                <a href="#"><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8948.PNG') ?>" data-num="four" alt="" class="img-responsive"><span>Mis mascotas <small>Una vez que ingreses con tu usuario y contraseña podrás ver la lista de las mascotas que diste de alta.</small></span></a>
+                                <a href="#"><img src="<?php echo $this->basePath('img/pantallas_pets/IMG_8995.JPG') ?>" data-num="five" alt="" class="img-responsive"><span>Reportar extravió <small>La App Recupera te permite compartir en tus redes sociales la información de tu mascota en caso de extravío.</small></span></a>
+                                <a href="#"><img src="<?php echo $this->basePath('img/pantallas_pets/ajustes_2.JPG') ?>" data-num="six" alt="" class="img-responsive"><span> Ajustes<small>En esta sección el usuario puede observar los terminos y condiciones de pegalinas recupera, perfil y acerca de.</small></span></a>
+                            </div>
+                        </div>
+                    </div><!-- Col ends -->
+                    <div class="col s12 m4 l4 features-section-row right">                     
+                        <div class="features-section-box right four">
+                            <i class="ion-ios-list z-depth-1 trans-effect"></i>
+                            <div class="features-text ">
+                                <h4 class="trans-effect">Mis Mascotas</h4>
+                                <p style="text-align: justify"><font color="black">En esta vista puedes observar las mascotas que registraste  en tu cuenta, así como el estado en que se encuentran, por ejemplo: registrada o extraviada.</font></p>
+                            </div>
+                        </div><!-- Feature box ends -->
+                        <div class="features-section-box right five">
+                            <i class="ion-eye z-depth-1 trans-effect"></i>
+                            <div class="features-text ">
+                                <h4 class="trans-effect">Reportar extravió</h4>
+                                <p style="text-align: justify"><font color="black">La App Recupera te permite compartir en tus redes sociales la información de tu mascota en caso de extravío.</font></p>
+                            </div>
+                        </div><!-- Feature box ends -->
+                        <div class="features-section-box right six">
+                            <i class="ion-android-settings z-depth-1 trans-effect"></i>
+                            <div class="features-text ">
+                                <h4 class="trans-effect">Ajustes</h4>
+                                <p style="text-align: justify"><font color="black">En esta sección puedes acceder a  las preguntas frecuentes, términos y condiciones de Recupera, cómo funciona  y un centro de notificaciones donde podrás observar quien encuentra tu mascota así como su ubicación.</font></p>
+                            </div>
+                        </div><!-- Feature box ends -->
+                    </div><!-- Col ends -->
+                </div><!-- Row ends -->
+           </b> </div><!-- Container ends -->
+        </section><!-- Section ends -->   
+
+
+
+         <section style="margin-top:70px"><!-- Section -->
+            
+            <div class="container center">
+
+               <!-- <div class="row">
+                    <div class="col s12 l8 offset-l2">
+                        <div class="center-heading">
+                            <h5>¡Protege a tu mascota y ayúdala a regresar a casa en caso de que se extravíe y sea encontrada por alguien!</h5><br>
+                            
+                            <p style="text-align: justify">El Tag para mascotas Recupera, funciona a través de la App móvil Pegalinas Recupera, la cual es compatible con los sistemas operativos de Android y IOS.  Funciona de la siguiente manera:
+
+                             1.     Se Descarga la App al Smartphone
+                             2.     Creas una cuenta y activas el Tag al escanear el código QR que viene al reverso para asociarlo
+                             3.     Finalmente completas un perfil para la mascota con su foto y datos generales incluyendo los del veterinario y el chip<br>
+
+                             En caso de extravío, si alguien encuentra tu mascota, con sólo escanear el código QR, a ti te llegará una alerta a tu teléfono con la ubicación en el mapa a donde se escaneó y los datos de la persona a contactar. Asimismo te llegará un correo electrónico. De esta forma se inicia el proceso de devolución de tu mascota.<b> ¡El uso de la App es completamente gratuito y no hay cargos adicionales!</b> </p>
+                        </div>
+                    </div>
+                </div>-->
+                     
+                <div class="video">
+                    <!--<iframe  height="360" width="640" src="https://www.youtube.com/embed/twJ_9e0Svv4" frameborder="0" allowfullscreen></iframe>-->
+                    <iframe width="360" height="640" src="https://www.youtube.com/embed/uFEtp4wk1Uc" frameborder="0" allowfullscreen></iframe>
+                </div> 
+            </div><!-- Container ends -->
+        </section><!-- Section ends -->
+
+
+        <!-- Section price -->
+        <section id="pricepets" class="price-section z-depth-1">
+            <!--<div class="overlay-shade"></div>-->
+            <div class="sec-padded-1x">
+                
+                    <div class="row">
+                        <div class="col s12 l12">
+                            <div class="center-heading">
+
+                                    <!--<div class="col s12 m4 l3" style="margin-top: 40px"><img src="img/QR oval_cuadrado.png" style="width:80%; height: 80%;"alt="codigos qr" class="phone-wrapper responsive-img"></div>-->
+                            
+                                    <div class="col s12 m12 l12" style="margin-top: 50px"><h1 class="textpets"><font color="#81BEF7"><b>COMPRA TU TAG AQUÍ:</font></h1></div>
+                                  
+                                        <!--<div class="col s12 m4 l3"><img src="<?php echo $this->basePath('img/pets/tag mascota.png') ?>" style="width:100%; height: 100%;"alt="tag mascotas" class="phone-wrapper responsive-img"></div>-->
+                            </div> 
+                                                
+                        </div><br><br>
+
+                    </div>
+                    
+                    <div class="row pricingpets-row center">    
+                    <div class="col s12 m4 l4"><img src="<?php echo $this->basePath('img/pets/cat.png') ?>" alt="tag mascotas" class="phone-wrapper responsive-img"></div>
+
+                         <div class="col s12 m4 l4">
+                            <div class="pricingpets-item z-depth-2 wow fadeIn" data-wow-delay="0.3s">
+                                <h3 class="pricingpets-title">Tag</h3>
+                                <div class="pricingpets-price"><span class="pricingpets-currency">$</span>199<span class="pricingpets-period">/ pesos</span></div>
+                                <p class="pricingpets-sentence"></p>
+                                <ul class="pricingpets-feature-list">
+                                    <li class="pricingpets-feature"><i class="ion-android-checkmark-circle"></i>1 Tag de acero inoxidable con recubrimiento acrílico y aro de metal niquelado</li>
+                                    <li class="pricingpets-feature"><i class="ion-android-checkmark-circle"></i>Cada Tag trae impreso un código QR único para ser activado y registrado</li>
+                                    <li class="pricingpets-feature">
+                                    <i class="ion-android-checkmark-circle"></i>Diámetro de 2.5 cm, tamaño  ideal para cualquier tipo de mascota 
+                                    </li>
+                                </ul>
+                                <a href="http://www.pegalinas.com/home/281-tag-recupera-mascotas.html" target="_blank">
+                                <button class="pricingpets-action waves-effect waves-light red btn tooltipped" data-position="top" data-delay="50" data-tooltip="Serás remitido a la página de pegalinas.com">adquirir</button></a>
+                            </div>
+                        </div><!-- Col ends -->
+                        <div class="col s12 m4 l4"><img src="<?php echo $this->basePath('img/pets/Tagfrenteyvuelta_2.png') ?>"alt="tag mascotas" class="phone-wrapper responsive-img"></div>
+            
+                    </div><!-- Row ends -->
+                   
+                   
+                    
+                
+            </div><!-- Sec-padded ends -->  
+        </section><!-- Section ends -->
+
+
+        <!-- Modal for video preview -->
+        <div class="md-modal md-effect-1 valign-wrapper" id="m-video">
+            <div class="md-content z-depth-2">
+                <a class="md-close"><i class="ion-android-close"></i></a>
+                <!-- Add your video iframe here -->
+                <iframe src="https://player.vimeo.com/video/212436186" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div><!-- Modal ends -->
+
+ 
+
+
+        <!-- Modal Structure -->
+    
+    <div id="modal_article_found" class="modal" style="max-height: 84% !important;">
+    <div class="modal-content" style="padding-bottom: 4px !important;">
+        <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s12 m2 l2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s12 m10 l10">
+        <h4 class="center-align">Parece que encontraste un art&iacute;culo</h4>
+        </div>
+        </div>
+        
+        <p class="center-align">Envia un mensaje al dueño del art&iacute;culo para que esté enterado y pueda contactarte.</p>
+        <div class="row" style="margin-top: 20px;">
+            <form id="form_article_found" method="POST" action="#" class="col s12 m12 l12">
+
+                <input type="hidden" id="id_article" name="id_article">
+                <input type="hidden" id="id_code_qr" name="id_code_qr">
+                <input type="hidden" id="email_owner" name="email_owner">
+
+                <div class="row">
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="name_p" type="text" class="validate" name="name_p" data-validetta="required" data-vd-message-required="Ingresa tu nombre" />
+                        <label for="name_p">Nombre</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="phone_p" type="text" class="validate" name="phone_p" data-validetta="required" data-vd-message-required="Ingresa tu teléfono" />
+                        <label for="phone_p">Tel&eacute;fono</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="email_p" type="text" class="validate" name="email_p" data-validetta="required" data-vd-message-required="Ingresa tu correo electrónico" />
+                        <label for="email_p">Correo Electr&oacute;nico de contacto</label>
+                    </div>
+
+                    <div id="div_phone_u"  class="input-field col s12 m6 l6 " style="display:none;">
+                        <input style="color:blue" id="phone_u" type="text" class="validate" name="phone_u" placeholder="Telefono" disabled="disabled" />
+                        <label for="phone_u">Tel&eacute;fono del propietario del art&iacute;culo</label>
+                    </div>
+
+                    <div id="div_rew"  class="input-field col s12 m6 l6" >
+                    </div>
+
+                    <div id="div_reward"  class="input-field col s12 m6 l6" style="display:none;">
+                        <input type="text" class="validate" disabled="disabled">                        
+                        <label style="color:red" id="reward">Este art&iacute;culo cuenta con recompensa</label>
+                    </div>
+                    
+                
+                    <div class="input-field col s12 m12 l12">                   
+                        <textarea id="comment_p" class="materialize-textarea" name="comment_p" data-validetta="required" data-vd-message-required="Ingresa algún comentario">Hola, encontre tu artículo. Contáctame!</textarea>
+                        <label for="comment_p">Comentario</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <button type="submit" class="waves-effect waves-light btn-large teal col s12 m12 l12">
+                            <!--<i class="material-icons left">send</i>--> Enviar
+                        </button>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <a href="javascript:void(0)" id="btn_close_modal_article_found" class="waves-effect waves-light btn-large red col s12">Cerrar</a>
+                    </div>  
+
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!--<div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>-->
+</div>
+
+
+
+        <!-- Scripts -->
+        <script>
+
+    // BasePath
+    var $basePath           = '<?php echo $this->basePath(); ?>';
+
+    
+    // Formulario
+    var $form_article       = $("#form_article");
+
+
+    // FORMULARIO DE CONTACTAR AL DUENO DE UN ARTICULO
+    var $form_article_found = $("#form_article_found");
+
+
+    // Cuando el documento esta listo
+    $(document).ready(function() {
+
+        // BANDERA MOSTRAR MODAL
+        var $flagShowModal = localStorage.getItem("flagShowModal");
+
+        // VALIDAMOS LA VARIABLE ALMACENADA
+       /* if ($flagShowModal != "okFlagShowModal") {
+
+            // MOSTRAMOS ALERTA
+            swal({
+                imageUrl:"<?php echo $this->basePath('/img/icons/Recupera Icon - copia.png') ?> ",
+                title: "¿Eres una institución?<br> (Colegio, Camp, Gym, etc) ",
+                showCancelButton: true,
+                //confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI',
+                cancelButtonText: 'NO'
+            }).then(function () {
+
+                // GENERMAMOS UNA VARIABLE EN EL ALMACENAMIEENTO LOCAL
+                localStorage.setItem("flagShowModal", "okFlagShowModal");
+
+                window.location.href= '#describe';
+
+            }, function (dismiss) {
+
+                // GENERMAMOS UNA VARIABLE EN EL ALMACENAMIEENTO LOCAL
+                localStorage.setItem("flagShowModal", "okFlagShowModal");
+
+            });
+        };*/
+
+        // ******************************************************************
+        // MODALES SE INICIALIZAN
+        // ****************************************************************** 
+        $('.modal').modal({
+            dismissible: false,// Callback for Modal close
+        });
+
+
+        // ******************************************************************
+        // CLICK EN EL BOTON CERRAR MODAL DE PIN
+        // ******************************************************************
+        $('#btn_close_modal_article_found').on('click', function(event) {
+            event.preventDefault();
+            
+            // OCULTAMOS MODAL DE ENCONTRASTE UN ARTICULO
+            $("#modal_article_found").modal('close');
+
+            // LIMPIAMOS CAMPO
+            $('#name_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#name_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#name_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#phone_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#phone_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#phone_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#email_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#email_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#email_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            //$('#comment_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            //$('#comment_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            //$('#comment_p').next().next().remove();
+            
+        });
+
+        // ******************************************************************
+        // VALIDAR FORMULARIO DE CONTACTAR AL DUENO DE UN ARTICULO
+        // ******************************************************************
+        $form_article_found.validetta({
+            bubblePosition : 'bottom',
+            bubbleGapTop   : 10,
+            bubbleGapLeft  : 5,
+            realTime : true,
+            onValid  : function(event){
+                event.preventDefault();
+
+                $.ajax({
+                    url      : $basePath + '/articles/codeqr',
+                    type     : 'POST',
+                    dataType : 'json',
+                    data     : $(this.form).serialize(),
+                })
+                .done(function(response) {
+                    console.log(JSON.stringify(response));
+                    //console.log("success");
+
+                    // Validamos la respuesta
+                    if (response.status == 'ok') {
+
+                        swal(
+                            'Gracias...',
+                            '¡Tu mensaje ha sido enviado!',
+                            'success'
+                        ).catch(swal.noop).then(function (result) {
+                                
+                            // OCULTAMOS MODAL DE ENCONTRASTE UN ARTICULO
+                            $("#modal_article_found").modal('close');
+
+                            // LIMPIAMOS CAMPO
+                            $('#name_p').val('');
+                            // QUITAMOS FOCO AL INPUT
+                            $('#name_p').blur();
+                            // REMOVEMOS VALIDACION DEL INPUT
+                            $('#name_p').next().next().remove();
+
+                            // LIMPIAMOS CAMPO
+                            $('#phone_p').val('');
+                            // QUITAMOS FOCO AL INPUT
+                            $('#phone_p').blur();
+                            // REMOVEMOS VALIDACION DEL INPUT
+                            $('#phone_p').next().next().remove();
+
+                            // LIMPIAMOS CAMPO
+                            $('#email_p').val('');
+                            // QUITAMOS FOCO AL INPUT
+                            $('#email_p').blur();
+                            // REMOVEMOS VALIDACION DEL INPUT
+                            $('#email_p').next().next().remove();
+
+                        });
+                       
+                    } else {
+                        swal(
+                            'Opsss..',
+                            '¡Ocurrio un error, intentalo de nuevo!',
+                            'error'
+                        ).catch(swal.noop);
+                    }
+
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            }
+        });
+
+        // ******************************************************************
+        // VALIDAR FORMULARIO DEL CODIGO QR
+        // ******************************************************************
+        $form_article.validetta({
+            bubblePosition: 'bottom',
+            bubbleGapTop: 10,
+            bubbleGapLeft: 0,
+            realTime : true,
+            onValid : function( event ) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: $basePath + '/articles/validatecodeqr',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $(this.form).serialize(),
+                })
+                .done(function(response) {
+                    //console.log(JSON.stringify(response));
+
+                    // YA ESTA ASIGNADO A ALGUN ARTICULO
+                    // {"data":[{"count":"1","id":"1","id_status":"7","id_article":"14","name_article":"39"}]}
+
+                    // NO ESTA ASIGNADO A NINGUN ARTICULO
+                    // {"data":[{"count":"1","id":"3","id_status":"1","id_article":"-1","name_article":null}]}
+
+                    //console.log("success");
+                    // VALIDAMOS SI EL CODIGO EXISTE
+                    if (response.data[0]['count'] == 1) {
+
+                        // VALIDAMOS EL ESTATUS Y EL ID DEL ARTICULO
+                        //if (response.data[0].id_status == 1 && response.data[0].id_article == -1) {
+                            
+                            /*swal(
+                                'Opsss..',
+                                '¡El código ingresado no esta asignado a algún artículo',
+                                'warning'
+                            );*/
+
+                        //} else {
+
+                            // AGREGAMOS UN VALOR AL INPUT email_owner
+                            /*$("#email_owner").val(response.data[0].email_owner);
+
+                            // AGREGAMOS UN VALOR AL INPUT id_article
+                            $("#id_article").val(response.data[0].id_article);
+
+                            // AGREGAMOS UN VALOR AL INPUT id_code_qr
+                            $("#id_code_qr").val(response.data[0].id);
+
+                            if (response.data[0].reward != 0 && response.data[0].reward != "") { 
+
+                                $('#div_reward').show();
+                            
+                                // MOSTRAR MODAL si tiene recompensa
+                                $('#reward').val(response.data[0].reward);
+                            }
+                            if (response.data[0].phone != "") { 
+
+                                $('#div_phone_u').show();
+                            
+                                // MOSTRAR MODAL si tiene recompensa
+                                $('#phone_u').val(response.data[0].phone_users);
+
+                                $("#phone_u").focus();
+                            }*/
+
+                            // MOSTRAR MODAL PARA CONTACTAR AL DUENO
+                            //$('#modal_article_found').modal('open');
+
+                            if(response.data[0].type_qr == 1){
+
+                                window.location.href = $basePath + '/articles/codeqr/' + $("#code_article").val();
+
+                            } else if(response.data[0].type_qr == 2) {
+
+                                window.location.href = $basePath + '/pets/codeqr/' + $("#code_article").val();
+
+                            };
+
+                        //} 
+
+                    } else if(response.data[0]['count'] == 0) {
+                        swal(
+                            'Opsss..',
+                            '¡El código ingresado no es valido!',
+                            'error'
+                        );
+                    }
+
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            }
+        });
+
+    });
+
+</script>
+        <!--<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+       
+        <script src="<?php echo $this->basePath('/js/materialize.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.smoothscroll.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/typed.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/wow.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/waypoint.min..js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.counterup.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/owl.carousel.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.flexslider-min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.validate.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/classie.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/config.js" type="text/javascript');?>"></script>
+       
+
+
+    </body>
+
+</html>

@@ -1,0 +1,50 @@
+<style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+</style>
+
+<div class="row">
+
+	<div class="col s12 m12 l12" style="margin-bottom: 35px;">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Eliminar art&iacute;culo</h3><br/>
+	</div>
+
+	<div class="col s12 m12 l12">
+		
+		<div class="card-panel">
+
+			<div class='circle-icon'>	
+				<i class="material-icons">delete</i>   
+			</div>
+		
+			<form action="" method="post">
+				<!--<input type="hidden" name="id" value="<?php //echo (int) $data['id']; ?>" />-->
+				<div class="row">
+					
+					<h4 class="grey-text text-darken-2 center-align">&iquest;Seguro que deseas eliminar este art&iacute;culo&quest;</h4>
+
+					<div class="col s12 m6 l6" style="margin-top: 20px;">
+						<!--<input type="submit" name="del" value="Aceptar" class="waves-effect waves-light btn-large green col s12 m12 l12" />-->
+						<button type="submit" class="waves-effect waves-light btn-large teal col s12 m12 l12">Aceptar</button>
+					</div>
+					<div class="col s12 m6 l6" style="margin-top: 20px;">
+						<a class="waves-effect waves-light btn-large red col s12 m12 l12" href="<?php echo $this->basePath('/articles'); ?>" >Cancelar</a>
+						<!--<input type="submit" name="del" value="Cancelar" class="waves-effect waves-light btn-large red col s12 m12 l12" />-->
+					</div>
+				</div>
+			</form>
+
+		</div>
+
+	</div>
+	
+</div>

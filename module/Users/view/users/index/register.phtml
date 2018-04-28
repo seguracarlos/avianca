@@ -1,0 +1,527 @@
+
+<br><br><br><br><br>
+
+<link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<!--<script src='https://www.google.com/recaptcha/api.js?hl=es'></script>-->
+
+<div class="row box_anim" style="margin-top: 20px;">
+	<div class="col s12 m6 offset-m3 l8 offset-l2">
+
+		<div  class="card">
+			<div  class="card-content">
+			<!--<form action="procesa.php" method="post"> -->
+				<?php
+				$form = $this->form;
+				$form->prepare();
+				echo $this->form()->openTag($form);
+				echo $this->formElement($form->get('id'));
+				?>
+					<div class="row">
+						<div class="col s12 m12 l12 center">
+    						<img class="responsive-img" src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="logo-pegalinas" style="height: 160px;" />
+						</div>
+						<div class="col s12 m12 l12">
+							<p class="center-align grey-text text-darken-3">Recupera, el camino m&aacute;s corto entre tus objetos perdidos y t&uacute;</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col s12 m12 l12" style="margin-top: 1rem; margin-bottom: .5rem; padding-left: 20px;">
+							<p>Tipo de usuario</p>
+							<p>
+      							<input name="type_user" type="radio" id="type_user_1" value="1" checked />
+      							<label for="type_user_1">Persona</label>
+    						</p>
+    						<p>
+      							<input name="type_user" type="radio" id="type_user_2" value="2" />
+      							<label for="type_user_2">Instituci&oacute;n</label>
+    						</p>
+    						<p>
+      							<input name="type_user" type="radio" id="type_user_3" value="3" />
+      							<label for="type_user_3">Proveedor</label>
+    						</p>
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">perm_identity</i>
+		          			<?php echo $this->formElement($form->get('name_user')); ?>
+		          			<label id="label_name_user" for="name_user">Nombre</label>
+		        		</div>
+
+		        		<div id="container_surname">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">perm_identity</i>
+			          			<?php echo $this->formElement($form->get('surname')); ?>
+			          			<label for="name_user">Apellido paterno</label>
+			        		</div>
+						</div>
+
+						<!-- div brand (marca)-->
+						<div id="container_brand" style="display: none;">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">branding_watermark</i>
+			          			<?php echo $this->formElement($form->get('brand')); ?>
+			          			<label for="brand">Marca</label>
+			        		</div>
+						</div>
+						<!-- div brand (marca)-->
+
+						<div id="container_campus" style="display: none;">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">location_on</i>
+			          			<?php echo $this->formElement($form->get('campus')); ?>
+			          			<label for="campus">Campus o sucursal</label>
+			        		</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+
+					    <div id="container_rfc" style="display: none;">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">assignment</i>
+			          			<?php echo $this->formElement($form->get('rfc')); ?>
+			          			<label for="rfc">RFC</label>
+			        		</div>
+						</div>
+
+						<div id="container_website" style="display: none;">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">web</i>
+			          			<?php echo $this->formElement($form->get('website')); ?>
+			          			<label for="website">Sitio web</label>
+			        		</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+
+					    <div id="container_name_bank" style="display: none;">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">business</i>
+			          			<?php echo $this->formElement($form->get('name_bank')); ?>
+			          			<label for="name_bank">Nombre de su banco</label>
+			        		</div>
+						</div>
+
+						<div id="container_number_acount" style="display: none;">
+							<div class="input-field col s12 m12 l6">
+								<i class="material-icons prefix">attach_money</i>
+			          			<?php echo $this->formElement($form->get('number_acount')); ?>
+			          			<label for="number_acount">Numero de cuenta</label>
+			        		</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">email</i>
+		          			<?php echo $this->formElement($form->get('email_user')); ?>
+		          			<label for="email_user">Correo electr&oacute;nico</label>
+		        		</div>
+
+		        		<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">email</i>
+		          			<?php echo $this->formElement($form->get('repeat_email_user')); ?>
+		          			<label for="repeat_email_user">Repetir Correo electr&oacute;nico</label>
+		        		</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 2rem;">
+
+						<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">lock</i>
+		          			<?php echo $this->formElement($form->get('password_user')); ?>
+		          			<label for="password_user">Contrase&ntilde;a</label>
+		        		</div>
+
+						<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">lock</i>
+							<?php echo $this->formElement($form->get('repeat_password_user')); ?>
+		          			<label for="repeat_password_user">Repetir Contrase&ntilde;a</label>
+		        		</div>
+
+					</div>
+
+					<div class="row">
+
+						<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">phone</i>
+			          		<?php echo $this->formElement($form->get('phone')); ?>
+			          		<label for="pin">Tel&eacute;fono </label>
+			        	</div>
+							
+						<div class="input-field col s12 m12 l6"  id="container_key_inventory" style="display: none;">
+							<i class="material-icons prefix">vpn_key</i>
+				          	<?php echo $this->formElement($form->get('key_inventory')); ?>
+				          	<label for="key_inventory">Contrase&ntilde;a de seguridad para tu cuenta </label>
+						</div>
+
+						<div id="container_pin" class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">fiber_pin</i>
+				          	<?php echo $this->formElement($form->get('pin')); ?>
+				          	<label for="pin">Pin para recuperar art&iacute;culos </label>
+				        </div>
+
+					</div>
+					<div class="row">
+					    <div class="input-field col s12 m12 l12"  id="container_interestingin" style="display: none;">
+							<i class="material-icons prefix">mood</i>
+				          	<?php echo $this->formElement($form->get('interestingin')); ?>
+				          	<label for="interestingin">Estoy interesado en: </label>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<p class="_rpioj">
+                        		Al registrarte, aceptas nuestras
+                       			<a  href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>" target="_blank">Condiciones</a>
+					    		y nuestra
+								<a class="_m4qul" href="<?php echo $this->basePath('/Documents/Política de privacidad Recupera.net.pdf')?>" target="_blank">Política de privacidad</a>
+								.
+								<!--<a class="btn btn-success" href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>"> Descarga </a>-->
+							</p>
+						</div>
+					</div>
+	
+					<div class="row">
+						<div class="col s12 m12 l12">
+								<!--  CAMBIAR reCAPTCHA SEGUN EL SERVIDOR QUE SE OCUPA, BASTA CON SOLO CAMBIAR EL data-sitekey
+
+								  reCAPTCHA DE AMAZON
+	                             <div class="g-recaptcha" data-sitekey="6Le-xBsUAAAAAAn9ab236oF31EJ1BK1gXV1-Cijn"></div>
+
+	                             reCAPTCHA DE RECUPERA
+	                             <div class="g-recaptcha" data-sitekey="6LeWVBkUAAAAAG4jSEKadauLuhIvht_EWYjg7Hmb"></div>
+
+	                             reCAPTCHA DE LOCAL
+	                             <div class="g-recaptcha" data-sitekey="6LehDRgUAAAAABvR9cuOWGp4P70goBgn2Q5zbbRG"></div>
+
+                                  reCAPTCHA DE LOCAL con cuenta cami
+	                             <div class="g-recaptcha" data-sitekey="6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z"></div>
+
+	                             -->                            
+
+							<div style= "margin-bottom:15px;"class="g-recaptcha" data-sitekey="6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z"></div>
+					
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<button type="submit" id="btn_register" class="waves-effect waves-light btn-large blue col s12 m12 l12">Reg&iacute;strate ahora</button>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<p class="center-align" style="font-size:25px;">
+								¿Ya tienes una cuenta?
+								<a href="<?php echo $this->basePath('/auth/login'); ?>">Iniciar sesi&oacute;n</a>
+							</p>
+						</div>
+					</div>
+
+				<?php
+				echo $this->form()->closeTag();
+				?>
+				<!--/form>-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	// BasePath
+	var $basePath                = '<?php echo $this->basePath(); ?>';
+	// Variable para almacenar el input contrasena
+	var $password_user           = $("#password_user");
+	// Variable para almacenar el input repetir contrasena
+	var $repeat_password_user    = $("#repeat_password_user");
+	// Nombre
+	var $label_name_user         = $("#label_name_user");
+	// Apellido paterno
+	var $container_surname       = $("#container_surname");
+	// campus
+	var $container_campus        = $("#container_campus");
+	// key_inventory
+	var $container_key_inventory = $("#container_key_inventory");
+	// key_inventory
+	var $container_pin           = $("#container_pin");
+
+	// variables para proveedor
+
+	// brand
+	var $container_brand 			= $("#container_brand");
+	// rfc
+	var $container_rfc        		= $("#container_rfc");
+	// website
+	var $container_website        	= $("#container_website");
+	// nombre banco
+	var $container_name_bank   		= $("#container_name_bank");
+	// numero de cuenta
+	var $container_number_acount  	= $("#container_number_acount");
+	// numero de cuenta
+	var $container_interestingin	= $("#container_interestingin");
+
+// ***********************************************************************
+// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+// ***********************************************************************
+$(document)
+.ajaxStart(function () {
+	//console.log("Inicia Ajax");
+	// Iniciamos panel de carga
+	$.LoadingOverlay("show");
+})
+.ajaxStop(function () {
+	//console.log("Termina Ajax");
+	// ocultamos panel de carga
+	$.LoadingOverlay("hide");
+});
+
+// ***********************************************************************
+// Cuando el documento esta listo
+// ***********************************************************************
+$(document).ready(function() {
+
+		// Al hacer un camnio e el input tipo de usuario
+		$( 'input[name="type_user"]:radio').change(function() {
+
+			// Valor del input
+			var $valueTypeUser = this.value;
+
+			// VALIDAMOS EL TIPO DE CUENTA QUE SE VA A CREAR 1.- USUARIO 2.- INSTITUCION 3.- PROVEEDOR
+			if ($valueTypeUser == 1) {
+				// Eres persona
+
+				// Cambiamos el texto
+				$label_name_user.text("Nombre");
+
+				// Mostramos el apellido
+				$container_surname.show('fast');
+
+				$('#surname').attr('data-validetta', 'required');
+
+				$('#surname').attr('data-vd-message-required', 'Por favor ingrese su apellido!');
+
+				// Ocultamos campus
+				$container_campus.hide();
+				//ocultamos campos de proveedor
+				$container_brand.hide();
+				$container_rfc.hide();
+				$container_website.hide();
+				$container_name_bank.hide();
+				$container_number_acount.hide();
+				$container_interestingin.hide();
+
+				$container_key_inventory.hide();
+				
+
+				$('#campus').removeAttr('data-validetta');
+
+				$('#campus').removeAttr('data-vd-message-required');
+
+				
+				$('#key_inventory').removeAttr('data-validetta');
+
+				$('#key_inventory').removeAttr('data-vd-message-required');
+
+
+				$('#pin').removeAttr('data-validetta');
+
+				$('#pin').removeAttr('data-vd-message-required');
+
+				// Limpiamos el campus
+				$("#campus").val('');
+				// Limpiamos la llave de inventario
+			    $("#key_inventory").val('');
+			    // Limpiamos el pin
+			   // $("#pin").val('');
+
+
+				// Mostramos el pin
+				$container_pin.show('fast');
+
+				$('#pin').attr('data-validetta', 'required');
+
+				$('#pin').attr('data-vd-message-required', 'Por favor ingrese su pin!');
+
+
+			}  else if ($valueTypeUser == 2) {
+				// Eres empresa
+
+				// Cambiamos el texto
+				$label_name_user.text("Nombre de institución");
+
+				// Ocultamos apellido
+				$container_surname.hide();
+				// Ocultamos campos de proveedor
+				$container_brand.hide();
+				$container_rfc.hide();
+				$container_website.hide();
+				$container_name_bank.hide();
+				$container_number_acount.hide();
+				$container_interestingin.hide();
+
+				$('#surname').removeAttr('data-validetta');
+
+				$('#surname').removeAttr('data-vd-message-required');
+
+				// Limpiamos el apellido paterno
+				$("#surname").val('');
+
+				// Ocultamos pin
+				$container_pin.hide();
+
+				$('#pin').removeAttr('data-validetta');
+
+				$('#pin').removeAttr('data-vd-message-required');
+
+				// Limpiamos el pin
+				$("#pin").val('');
+
+				// Mostramos el campus
+				$container_campus.show('fast');
+				$container_key_inventory.show('fast');
+
+
+				$('#campus').attr('data-validetta', 'required');
+
+				$('#campus').attr('data-vd-message-required', 'Por favor ingrese el campus o su sucursal!');
+
+				$('#key_inventory').attr('data-validetta', 'required');
+
+				$('#key_inventory').attr('data-vd-message-required', 'Por favor ingrese una contraseña para que accedas a tu inventario!');
+
+
+			} else if ($valueTypeUser == 3){
+				// Eres proveedor
+				//ocultamos campus
+				$container_campus.hide();
+				// Ocultamos apellido
+				$container_surname.hide();
+				// Ocultamos pin para recuperar contraseña
+				$container_surname.hide();
+
+				$container_key_inventory.hide();
+
+				// Cambiamos el texto
+				$label_name_user.text("Nombre de empresa o insitución");
+				// Mostramos el campus
+				$container_brand.show('fast');
+				$container_rfc.show('fast');
+				$container_website.show('fast');
+				$container_name_bank.show('fast');
+				$container_number_acount.show('fast');
+				$container_interestingin.show('fast');
+				$container_pin.show('fast');
+				
+
+				// Limpiamos el apellido paterno
+				$("#surname").val('');
+				// Limpiamos el pin
+				$("#pin").val('');
+				// Limpiamos el campus
+				$("#campus").val('');
+
+
+			}
+
+    		//alert(this.value);
+		});
+
+
+		$("#users").validetta({
+			bubblePosition: 'bottom',
+        	bubbleGapTop: 10,
+        	bubbleGapLeft: 5,
+        	realTime : true,
+			onValid : function( event ) {
+
+				// Detenemos el evento
+          		event.preventDefault();
+
+          		
+            	// Validamos si las contrasenas son iguales
+          		if ($password_user.val() != $repeat_password_user.val()) {
+          			// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Las contraseñas no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+				} else {
+
+					if (grecaptcha.getResponse().length == 0) {
+	          			//alert("llena el captcha");
+	          			swal(
+				  			'Opsss..',
+				  			'¡Debes de comprobar que no eres un robot!',
+				  			'error'
+						).catch(swal.noop);
+	          		} else{
+	          		
+						$.ajax({
+		        			url: $basePath + '/users/register',
+		        			type: 'POST',
+		        			dataType: 'json',
+		        			data: $(this.form).serialize(),
+		        		})
+		        		.done(function(response) {
+
+		        			console.log(response);
+		        			console.log("success");
+		        			if (response.status == 'ok') {
+		        				
+		        				swal({
+		        					title: '¡Buen trabajo!',
+	  								text: 'Gracias por registrate en Recupera ' + response.name,
+	  								type: 'success',
+		        					confirmButtonText: 'Iniciar Sesión'
+		        				}).catch(swal.noop).then(function () {
+									window.location = $basePath + '/auth/login';
+								});
+
+		        			} else if (response.status == 'fail') {
+
+		        				swal(
+				  					'Opsss..',
+				  					'¡Correo electrónico duplicado. Intenta con otro!',
+				  					'error'
+								).catch(swal.noop);
+
+								grecaptcha.reset();
+
+		        			}
+
+			        	})
+			        	.fail(function() {
+			        		console.log("error");
+			        	})
+			        	.always(function() {
+			        		console.log("complete");
+			        	});
+
+		        	}
+
+				}
+
+
+			}
+   		});
+});
+</script>

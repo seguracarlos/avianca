@@ -1,0 +1,1201 @@
+
+ <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="<?php echo $this->basePath('pegalinaslive/materialize/css/materialize.min.css'); ?>"  media="screen,projection"/>
+
+        <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto&subset=latin,devanagari" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="<?php echo $this->basePath('/pegalinaslive/sweetalert2/sweetalert2.min.css'); ?>" />
+        <link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+
+ <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath('pegalinaslive/materialize/js/materialize.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/sweetalert2/sweetalert2.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+
+<style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+</style>
+
+<br><br><br><br>
+<div class="row">
+
+	<div class="col s12 m12 l12">
+		
+		<div class="card-panel">
+
+			<div class="col s12 m12 l12 left-align" style="margin-bottom: 20px;">
+				<h3 class="grey-text text-darken-2 text-architects-daughter">Modifica tu perfil</h3><br>
+			</div>
+
+			<?php 
+			$form = $this->form;
+			$form->prepare();
+			echo $this->form()->openTag($form);
+			echo $this->formElement($form->get('id'));
+			?>
+
+
+				<div class="row">
+					
+					<div class="input-field col s6">
+						<!--<input placeholder="Placeholder" id="first_name" type="text" class="validate">-->
+						<?php echo $this->formElement($form->get('name')); ?>
+						<label for="name">Nombre:</label>
+					</div>
+
+					<div class="input-field col s6">
+					<?php if($this->type_perfil == 1) : ?>
+						<?php echo $this->formElement($form->get('surname')); ?>
+						<label for="surname">Apellidos</label>
+						<?php endif; ?>
+					</div>
+
+
+					<div class="input-field col s6">
+					<?php if($this->type_perfil == 2) : ?>
+						<?php echo $this->formElement($form->get('campus')); ?>
+						<label for="campus">Campus o sucursal</label>
+						<?php endif; ?>
+					</div>				
+
+
+				</div>
+
+				<div class="row">
+					
+					<div class="input-field col s6">
+						<?php echo $this->formElement($form->get('phone')); ?>
+						<label for="phone">Teléfono</label>
+					</div>
+
+					<div class="input-field col s6">
+					<?php if($this->type_perfil == 1) : ?>
+						<a class="btn tooltipped btn_validate_pin" data-position="top" data-tooltip="cambia tu pin para recuperar un artículo" href="javascript:void(0)">Cambiar pin</a>
+						<?php endif; ?>				
+					</div>
+
+					<div class="input-field col s6">
+					<?php if($this->type_perfil == 2) : ?>
+						<?php echo $this->formElement($form->get('addres')); ?>
+						<label for="addres">Dirección</label>
+						<?php endif; ?>
+					</div>
+
+				</div>
+
+
+					<div class="row">
+
+					<div class="input-field col s6">
+						<a class="btn tooltipped btn_validate_password" data-position="top" data-tooltip="cambia tu contraseña para iniciar sesión" href="javascript:void(0)">Cambiar contraseña de sesión</a>
+										
+					</div>
+                    <div class="input-field col s6">
+                        <a class="btn tooltipped btn_validate_pass1" data-position="top" data-tooltip="cambia tu cuenta de correo electr&oacute;nico" href="javascript:void(0)">Cambiar correo electrónico</a>            
+                    </div>
+
+					<div class="input-field col s6">
+					<?php if($this->type_perfil == 2) : ?>
+						<a class="btn tooltipped btn_validate_passwordinventory" data-position="top" data-tooltip="cambia tu contraseña para acceder a tu inventario" href="#modal3">Cambiar contraseña de seguridad</a>
+						 <div class="col s6">
+                            <p class="right-align btn_forgot_pass" style="font-size:15px;">
+                                <a href="javascript:void(0)">¿Olvidaste tu contrase&ntilde;a de seguridad?</a>
+                            </p>
+                        </div>  
+					<?php endif; ?>	
+                    <!--<div class="col s6 m6 l6">
+                            <p class="right-align" style="font-size:15px;">
+                                <a href="<?php echo $this->basePath('/auth/forgot-password'); ?>">¿Olvidaste tu contrase&ntilde;a?</a>
+                            </p>
+                        </div>	-->			
+					</div>
+
+					
+
+					</div>
+
+				
+
+					<div class="row">
+					
+					<div class="file-field input-field col s12 m6 l6">
+
+	      				<div class="btn">
+	        				<span>Imagen</span>
+	        				<!--<input type="file" name="imageone">-->
+	        				<?php echo $this->formElement($form->get('image')); ?>
+	      				</div>
+
+	      				<div class="file-path-wrapper">
+	        				<input class="file-path validate" type="text">
+	      				</div>
+
+	      				<div id="container_image" class="center z-depth-4" style="height: 300px; width: 300px; margin: auto auto 2rem;">
+	      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image" src="https://canna-pet.com/wp-content/plugins/ajax-search-pro/img/default.jpg">	
+	      				</div>
+
+	    			</div>
+	    			</div>
+
+				
+
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s6">
+						<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+						<?php //echo $this->formElement($form->get('submitbutton')); ?>
+					</div>
+
+					<div class="col s6">
+						<a href="<?php echo $this->basePath()."/users/perfil" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($form); ?>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+<!-- Modal Structure cambio de correo electronico -->
+<div id="modal_validate_pass_email" class="modal">
+    <div class="modal-content">
+
+    <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s8">
+        <h4 class="center-align">Cambiar correo electr&oacute;nico</h4>
+        </div>
+        </div>
+        
+        <p>En esta ventana podrás cambiar tu cuenta de correo electr&oacute;nico</p>
+        
+         <div class="row" style="margin-top: 20px;">
+                    <div class="col s12 m12 l12">
+                        <form id="form_validate_email">
+              
+                            <div id="div_pass_actual" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="password" type="password" name="password" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password">Por seguridad Ingresa la contrase&ntilde;a actual</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+                            <form id="form_update_email">
+
+                             <div id="div_update_email" style="display:none;" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_email" type="email" name="change_email" class="validate" data-validetta="required" data-vd-message-required="Ingresa la nueva cuenta de correo electr&oacute;nico">
+                                        <label for="email1">Nuevo Correo electr&oacute;nico</label>
+                                    </div>
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_email2" type="email" name="change_email2" class="validate" data-validetta="required" data-vd-message-required="Repite la cuenta de correo electr&oacute;nico">
+                                        <label for="email2">Repite Correo electr&oacute;nico</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_email" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+                    </div>
+                </div>
+    </div>    
+</div>
+<!--Modal Cambio de correo elctrónico-->
+
+
+
+<!-- Modal Structure -->
+<div id="modal_validate_pin" class="modal">
+	<div class="modal-content">
+    <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s8">
+		<h4 class="center-align">Cambiar Pin</h4>
+        </div>
+        </div>
+    
+		<p>En esta ventana podrás cambiar el pin que se utilizara para recuperar un artículo.</p>
+		
+		 <div class="row" style="margin-top: 20px;">
+                    <div class="col s12 m12 l12">
+                       <!-- <form id="form_validate_pin">
+              
+                            <div id="div_pin_actual" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="pin" type="password" name="pin" class="validate" data-validetta="required" data-vd-message-required="Ingresa el pin actual">
+                                        <label for="pin">Pin actual</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>-->
+                            <form id="form_update_pin">
+
+                             <div id="div_update_pin" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_pin" type="password" name="change_pin" class="validate" data-validetta="required" data-vd-message-required="Ingresa el pin">
+                                        <label for="password1">Nuevo Pin</label>
+                                    </div>
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_pin2" type="password" name="change_pin2" class="validate" data-validetta="required" data-vd-message-required="Ingresa el pin">
+                                        <label for="password2">Repite Pin</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pin" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+
+                           
+
+                        
+                    </div>
+                </div>
+
+	</div>
+	
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal_validate_pass" class="modal">
+	<div class="modal-content">
+
+    <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s8">
+        <h4 class="center-align">Cambiar contraseña</h4>
+        </div>
+        </div>
+		
+		<p>En esta ventana podrás cambiar la contraseña con la que inicias tu sesión en pegalinas recuperalo</p>
+		
+		 <div class="row" style="margin-top: 20px;">
+                    <div class="col s12 m12 l12">
+                        <form id="form_validate_pass">
+              
+                            <div id="div_pass_actual" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="password" type="password" name="password" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password">Contrase&ntilde;a actual</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+                            <form id="form_update_pass">
+
+                             <div id="div_update_pass" style="display:none;" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_pass" type="password" name="change_pass" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password1">Nueva Contrase&ntilde;a</label>
+                                    </div>
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_pass2" type="password" name="change_pass2" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password2">Repite Contrase&ntilde;a</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+
+                           
+
+                        
+                    </div>
+                </div>
+
+	</div>
+	
+</div>
+
+
+
+
+<!--Modal Cambio de contraseña inventario-->
+
+
+
+<!-- Modal Structure -->
+<div id="modal_validate_passinventory" class="modal">
+	<div class="modal-content">
+		 <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s8">
+        <h4 class="center-align">Cambiar contraseña</h4>
+        </div>
+        </div>
+		<p>En esta ventana podrás cambiar la contraseña con la que accedes a tu inventario</p>
+		
+		 <div class="row" style="margin-top: 20px;">
+                    <div class="col s12 m12 l12">
+                        <form id="form_validate_passinventory">
+              
+                            <div id="div_passinventory_actual" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="password_inventory" type="password" name="password_inventory" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password">Contrase&ntilde;a actual</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+                            <form id="form_update_passinventory">
+
+                             <div id="div_update_passinventory" style="display:none;" class="row">
+                                <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_passinventory" type="password" name="change_passinventory" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password01">Nueva Contrase&ntilde;a</label>
+                                    </div>
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <input id="change_passinventory2" type="password" name="change_passinventory2" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+                                        <label for="password02">Repite Contrase&ntilde;a</label>
+                                    </div>
+                                </div>
+
+                                 <div class="col s12 m6 l6 offset-m3 offset-l3">
+                                
+                                <div class="col s12 m6 l6">
+                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+                                    Aceptar
+                                    </button>
+                                </div>
+
+                                <div class="col s12 m6 l6">
+                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                            </form>
+
+                           
+
+                        
+                    </div>
+                </div>
+
+	</div>
+	
+</div>
+
+
+
+
+
+<script>
+
+
+
+// PASSWORD CHANGE SESIÓN
+var $change_pass   = $("#change_pass");
+
+// REPETIR PASSWORD CHANGE SESIÓN
+var $change_pass2   = $("#change_pass2");
+
+// PASSWORD CHANGE EMAIL
+var $change_email   = $("#change_email");
+
+// REPETIR PASSWORD CHANGE EMAIL
+var $change_email2   = $("#change_email2");
+
+
+// PIN DE RECUPERACIÓN
+var $change_pin   = $("#change_pin");
+
+// REPETIR  PIN DE RECUPERACIÓN
+var $change_pin2   = $("#change_pin2");
+
+// PASSWORD CHANGE INVENTARIO
+var $change_passinventory   = $("#change_passinventory");
+
+// PASSWORD CHANGE INVENTARIO
+var $change_passinventory2   = $("#change_passinventory2");
+
+// VALOR DE LA IMAGEN 
+	var $image = "<?php echo $this->image; ?>";
+	//console.log($image);
+
+	$(document).ready(function() {
+
+		// Inicializar modales
+		$('.modal').modal({
+			dismissible: false
+		});
+
+
+		/* $("#pin").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+       // $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   }); */
+
+
+
+		// CARGAR IMAGENES DE ARTICULOS SI ES QUE EXITEN
+		if ($image != '') {
+			// CARGAMOS UNA IMAGEN
+			$("#preview_image").attr('src','data:image/jpg;base64,'+$image);
+		};
+
+
+		function previewImgPerfil(input, img_perfil) {
+
+			if (typeof (FileReader) != "undefined") {
+
+				var image_preview = $("#"+img_perfil);
+
+				// Limpiar img preview
+		 		image_preview.empty();
+
+		 		var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                image_preview.attr('src', e.target.result);
+	            }
+	            //image_holder.show();
+	            reader.readAsDataURL(input.files[0]);
+
+	 		} else {
+	            alert("Este navegador no admite FileReader.");
+	        }
+		}
+
+		// Al hacer un cambio en el input imagen 
+	    $("#image").change(function () {
+	    	// LLamamos a la funcion
+	        previewImgPerfil(this,"preview_image");
+	    });
+
+		
+
+// FORMULARIO contraseña sesion para email 
+            $form_validate_email = $("#form_validate_email");
+            $form_update_email = $("#form_update_email");
+
+// FORMULARIO contraseña sesion 
+            $form_validate_pass = $("#form_validate_pass");
+            $form_update_pass = $("#form_update_pass");
+
+// FORMULARIO pin  
+            $form_validate_pin = $("#form_validate_pin");
+            $form_update_pin = $("#form_update_pin");
+
+// FORMULARIO contraseña inventario
+            $form_validate_passinventory = $("#form_validate_passinventory");
+            $form_update_passinventory = $("#form_update_passinventory");
+
+//Boton de password sesion
+$btn_validate_pass1  = $('.btn_validate_pass1'); //para correo electronico 
+
+            $btn_validate_password  = $('.btn_validate_password');
+            $btn_validate_pin  = $('.btn_validate_pin');
+            $btn_validate_passwordinventory  = $('.btn_validate_passwordinventory');
+
+            $div_pass_actual  = $('#div_pass_actual');
+            $div_update_pass  = $('#div_update_pass');
+
+            $div_pin_actual  = $('#div_pin_actual');
+            $div_update_pin  = $('#div_update_pin');
+
+            $div_passinventory_actual  = $('#div_passinventory_actual');
+            $div_update_passinventory  = $('#div_update_passinventory');
+
+
+            // DOCUMENTO CARGA
+            jQuery(document).ready(function($) {
+
+                // Inicializar modales
+                $('.modal').modal({
+                    dismissible: false
+                });
+
+                                 
+                $(".button-collapse").sideNav();
+
+                // CLICK EN EL BOTON VALIDAR PASSWORD DE SESION
+                $btn_validate_password.on('click', function(event) {
+                    //event.preventDefault();
+
+                    // VALIDAR EL TIPO DE USUARIO
+                    
+                    // Llamanos a la funcion validar articulos
+                    validatePassword();
+
+                });
+
+        
+                // FUNCION PARA VALIDAR LISTA DE ARTICULOS
+                function validatePassword()
+                {
+
+                 $('#modal_validate_pass').modal('open');
+
+                             
+                }
+
+                 // CLICK EN EL BOTON VALIDAR PASSWORD DE SESION para email
+                $btn_validate_pass1.on('click', function(event) {
+                    //event.preventDefault();
+
+                    // VALIDAR EL TIPO DE USUARIO
+                    
+                    // Llamanos a la funcion validar articulos
+                    validatePass1();
+
+                });
+
+                 // FUNCION PARA VALIDAR LISTA DE ARTICULOS
+                function validatePass1()
+                {
+
+                 $('#modal_validate_pass_email').modal('open');
+
+                             
+                }
+
+                 
+
+
+
+                 // CLICK EN EL BOTON VALIDAR PASSWORD DE INVENTARIO
+                $btn_validate_passwordinventory.on('click', function(event) {
+                    //event.preventDefault();
+
+                    // VALIDAR EL TIPO DE USUARIO
+                    
+                    // Llamanos a la funcion validar articulos
+                    validatePasswordinventory();
+
+                });
+
+
+                // FUNCION PARA VALIDAR LISTA DE ARTICULOS
+                function validatePasswordinventory()
+                {
+
+                 $('#modal_validate_passinventory').modal('open');
+
+                             
+                }
+
+
+                  // CLICK EN EL BOTON VALIDAR PIN
+                $btn_validate_pin.on('click', function(event) {
+                    //event.preventDefault();
+
+                    // VALIDAR EL TIPO DE USUARIO
+                    
+                    // Llamanos a la funcion validar articulos
+                    validatePin();
+
+                });
+
+
+                // FUNCION PARA VALIDAR PIN
+                function validatePin()
+                {
+
+                 $('#modal_validate_pin').modal('open');
+
+                             
+                }
+
+                
+
+                // VALIDAR FORMULARIO PARA VER SI LA CONTRASEÑA DE SESION ES CORRECTA
+                $form_validate_pass.validetta({
+                    bubblePosition: 'bottom',
+                    bubbleGapTop: 10,
+                    bubbleGapLeft: 0,
+                    realTime : true,
+                    onValid : function( event ) {
+
+                        event.preventDefault();
+
+
+                        $.ajax({
+                            url: $basePath + '/users/perfil',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $(this.form).serialize(),
+                        })
+                        .done(function(response) {
+                            console.log(response.password[0].count);
+                            // Validamos la respuesta
+                            if (response.password[0].count == 1) {
+                                // Redirigimos a articulos
+                                $('#div_pass_actual').hide();
+                                $('#div_update_pass').show();
+
+                                //window.location = $basePath + '/users/editperfil';
+                            } else if(response.password[0].count == 0){
+                                swal(
+                                    'Opsss..',
+                                    '¡La contraseña no es correcta!',
+                                    'error'
+                                ).catch(swal.noop);
+                            }
+
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+
+                    }
+                });
+
+
+// VALIDAR FORMULARIO PARA VER SI LA CONTRASEÑA DE SESION ES CORRECTA para correo electronico
+                $form_validate_email.validetta({
+                    bubblePosition: 'bottom',
+                    bubbleGapTop: 10,
+                    bubbleGapLeft: 0,
+                    realTime : true,
+                    onValid : function( event ) {
+
+                        event.preventDefault();
+
+
+                        $.ajax({
+                            url: $basePath + '/users/perfil',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $(this.form).serialize(),
+                        })
+                        .done(function(response) {
+                            console.log(response.password[0].count);
+                            // Validamos la respuesta
+                            if (response.password[0].count == 1) {
+                                // Redirigimos a articulos
+                                $('#div_pass_actual').hide();
+                                $('#div_update_email').show();
+
+                                //window.location = $basePath + '/users/editperfil';
+                            } else if(response.password[0].count == 0){
+                                swal(
+                                    'Opsss..',
+                                    '¡La contraseña no es correcta!',
+                                    'error'
+                                ).catch(swal.noop);
+                            }
+
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+
+                    }
+                });
+
+
+
+
+// VALIDAR FORMULARIO PARA VER SI LA CONTRASEÑA DEL INVENTARIO ES CORRECTA
+                $form_validate_passinventory.validetta({
+                    bubblePosition: 'bottom',
+                    bubbleGapTop: 10,
+                    bubbleGapLeft: 0,
+                    realTime : true,
+                    onValid : function( event ) {
+
+                        event.preventDefault();
+
+
+                        $.ajax({
+                            url: $basePath + '/users/perfilinventory',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $(this.form).serialize(),
+                        })
+                        .done(function(response) {
+                            console.log(response.password_inventory[0].count);
+                            // Validamos la respuesta
+                            if (response.password_inventory[0].count == 1) {
+                                // Redirigimos a articulos
+                                $('#div_passinventory_actual').hide();
+                                $('#div_update_passinventory').show();
+
+                                //window.location = $basePath + '/users/editperfil';
+                            } else if(response.password_inventory[0].count == 0){
+                                swal(
+                                    'Opsss..',
+                                    '¡La contraseña no es correcta!',
+                                    'error'
+                                ).catch(swal.noop);
+                            }
+
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+
+                    }
+                });
+
+
+// VALIDAR FORMULARIO PARA VER SI EL PIN ES CORRECTO
+              $form_validate_pin.validetta({
+                    bubblePosition: 'bottom',
+                    bubbleGapTop: 10,
+                    bubbleGapLeft: 0,
+                    realTime : true,
+                    onValid : function( event ) {
+
+                        event.preventDefault();
+
+
+                        $.ajax({
+                            url: $basePath + '/users/pin',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $(this.form).serialize(),
+                        })
+                        .done(function(response) {
+                            console.log(response.pin[0].count);
+                            // Validamos la respuesta
+                            if (response.pin[0].count == 1) {
+                                // Redirigimos a articulos
+                                $('#div_pin_actual').hide();
+                                $('#div_update_pin').show();
+
+                                //window.location = $basePath + '/users/editperfil';
+                            } else if(response.pin[0].count == 0){
+                                swal(
+                                    'Opsss..',
+                                    '¡El pin no es correcto!',
+                                    'error'
+                                ).catch(swal.noop);
+                            }
+
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        })
+                        .always(function() {
+                            console.log("complete");
+                        });
+
+                    }
+                }); /*metodo para ingresar pin actaul*/
+
+
+
+
+            });
+
+
+
+              	// VALIDAR FORMULARIO DE CAMBIO DE PIN
+	$form_update_pin.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($('#change_pin').val() != $("#change_pin2").val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los pin no coinciden!',
+		  				'error'
+					);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/users/updatepin',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(response);
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+	        				window.location = $basePath + '/users/perfil';
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+	});
+
+
+
+
+              	// VALIDAR FORMULARIO DE CAMBIO DE CONTRASEÑA EN SESION
+	$form_update_pass.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($('#change_pass').val() != $("#change_pass2").val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Las contraseñas no coinciden!',
+		  				'error'
+					);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/users/updatepass',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(response);
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+	        				window.location = $basePath + '/users/perfil';
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+	});
+
+
+                // VALIDAR FORMULARIO DE CAMBIO DE EMAIL
+    $form_update_email.validetta({
+            bubblePosition: 'bottom',
+            bubbleGapTop: 10,
+            bubbleGapLeft: 0,
+            realTime : true,
+            onValid : function( event ) {
+
+                event.preventDefault();
+
+                // Validamos si los codigos qr son correctos
+                if ($('#change_email').val() != $("#change_email2").val()) {
+                    // Mostramos alerta
+                    swal(
+                        'Atención',
+                        '¡Los correos electr&oacute;nicos no coinciden!',
+                        'error'
+                    );
+                        
+                } else {
+                    
+                    var parametros = new FormData($(this.form)[0]);
+
+                    $.ajax({
+                        url: $basePath + '/users/updateemail',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: false, //importante enviar este parametro en false
+                        processData: false, //importante enviar este parametro en false
+                        data: parametros//$(this.form).serialize(),
+                    })
+                    .done(function(response) {
+                        console.log(response);
+                        //console.log("success");
+                        if (response.status == 'ok') {
+                            swal(
+                        'Atención',
+                        '¡cerraremos tu sesi&oacute;n para que inicies con tu nueva cuenta de correo electr&oacutenico!',
+                        'success'
+                    ).then(function () {
+                        window.location = $basePath + '/auth/login';
+                    });
+                            
+                        } else if(response.status == 'fail'){
+                            swal(
+                                'Opsss..',
+                                '¡Ocurrio un error intentalo de nuevo!',
+                                'error'
+                            );
+                        }
+
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+
+                }
+
+
+            }
+    });
+
+
+
+              	// VALIDAR FORMULARIO DE CAMBIO DE CONTRASEÑA PARA INVENTARIO
+	$form_update_passinventory.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($('#change_passinventory').val() != $("#change_passinventory2").val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Las contraseñas no coinciden!',
+		  				'error'
+					);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/users/updatepassinventory',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(response);
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+	        				window.location = $basePath + '/users/perfil';
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+	});
+
+
+
+});
+
+
+		
+
+
+
+</script>
+

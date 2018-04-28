@@ -1,0 +1,759 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<div class="row">
+	
+	<div class="col s12 m12 l12">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Art&iacute;culos Encontrados</h3><br>
+	</div>
+
+	<div class="col s12 m4 l4" style="margin-bottom: 20px;">
+
+		<a class="waves-effect waves-light btn-large green tooltipped" data-position="right" data-delay="50" data-tooltip="Agregar art&iacute;culo encontrado" href="<?php echo $this->basePath('/articles/addarticlefound'); ?>">
+			<i class="material-icons left">add_circle</i> Registrar artículo encontrado
+		</a>
+	
+	</div>
+
+	<div class="col s12 m4 l4">
+
+		<?php if($this->perfil == 2) : ?>
+			<a class="waves-effect waves-light btn-large red tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar art&iacute;culos encontrados" href="<?php echo $this->basePath('/articles/deletearticles'); ?>">
+				<i class="material-icons left">delete_sweep</i> Eliminar Articulos
+			</a>
+		<?php endif; ?>
+		
+	</div>
+
+	<div align="right" class="col s12 m4 l4" style="margin-bottom: 20px;">
+
+		<?php if($this->perfil == 2) : ?>
+			<a data-keysecure="articles" class="btn-large waves-effect waves-light  amber darken-1 tooltipped btn_validate_articles" data-position="left" data-delay="50" data-tooltip="Accederás a tus art&iacute;culos " href="javascript:void(0)">
+				<i class="material-icons left">description</i> Mis art&iacute;culos
+			</a>
+		<?php endif; ?>
+
+	</div>
+
+	<div class="col s12 m12 l12">
+	
+		<table id="table_articles" class="bordered striped highlight responsive-table">
+
+			<thead>
+				<tr>
+					<th data-field="imgArt">Foto</th>
+					<th data-field="event_articles">Evento</th>
+					<!-- agregar evento checar si no se desborda-->					
+					<th data-field="articulo">Art&iacute;culo</th>
+					<th data-field="status">Estatus</th>
+					<th data-field="fecha_encontrado">Fecha Encontrado</th>
+					<th data-field="fecha_devolucion">Fecha de Devoluci&oacute;n</th>
+					<th data-field="fecha_devolucion">Almacen</th>
+					<th data-field="detalle"></th>
+					<th data-field="ubicado"></th>
+					<th data-field="acciones"></th>
+					<th data-field="eliminar"></th>
+					<th data-field="push_notification"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+			<?php foreach($this->articles as $art) : ?>
+				<tr>
+					<td>
+					<?php if($art["image_name"] != '' && $art["image_name"] != null) :  ?>
+						<img style="width: 50px; height: 50px" class="" src="<?php echo $this->basePath("images/articles/".$art["image_name"]); ?>" alt="articulo">
+					<?php else : ?>
+						<img style="width: 50px; height: 50px" src="<?php echo $this->basePath('img/icon_article_real.png'); ?>" alt="articulo">
+					<?php endif; ?>
+					</td>
+					<td><?php echo $art["event_articles"]; ?></td>
+					
+					<td><?php echo ($art["name_article_two"] != '') ? $art["name_article_two"] : $art["name_article"]; ?></td>
+					<td>
+					<!--<?php //echo $art["name_status"]; ?>-->
+					<?php if($art['return_date'] == '' || $art['return_date'] == '0000-00-00 00:00:00' || $art['return_date'] == null) : ?>
+						Encontrado
+					<?php else : ?>
+						Devuelto
+					<?php endif; ?>
+					</td>
+					
+					
+					<td><?php echo date("d-m-Y", strtotime($art["date_found"])); ?></td>
+					<td>
+					<?php
+
+						// FECHA DE DEVOLUCION
+						$returnDate  = $art["return_date"];
+						
+						// FECHA FINAL
+						$date_return = 'No devuelto';
+
+						// VALIDAMOS SI YA EXISTE UNA FECHA DE DEVOLUCION
+						if ($returnDate != '' && $returnDate != '0000-00-00 00:00:00' && $returnDate != NULL) {
+
+							$date_return = date("d-m-Y", strtotime($returnDate));
+
+						}
+
+						// MOSTRAMOS FECHA DE DEVOLUCION
+						echo $date_return;
+
+					?>
+					</td>
+					<td><?php echo $art["warehouse"]; ?></td>
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating teal tooltipped" data-position="left" data-delay="50" data-tooltip="Detalle Art&iacute;culo" href="<?php echo $this->basePath('/articles/detailarticlefound/') . $art["id"]; ?>">				
+      						<i class="material-icons">description</i>
+						</a>
+					</td>
+
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating orange tooltipped" data-position="left" data-delay="50" data-tooltip="Ubicaci&oacute;n Art&iacute;culo" href="<?php echo $this->basePath('/articles/see-map-articlefound/') . $art["id"]; ?>" >
+							<i class="material-icons">location_on</i>
+						</a>
+					</td>
+
+					<td class="center">
+
+					<?php if($art['return_date'] == '' || $art['return_date'] == '0000-00-00 00:00:00') : ?>
+						
+						<a class="btn_return_article waves-effect waves-light btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Devolver Art&iacute;culo" href="javascript:void(0)" data-ownalien="<?php echo $art['own_alien']; ?>" data-idreturn="<?php echo $art['id_return']; ?>" data-idarticles="<?php echo $art['id']; ?>" data-iduser="<?php echo $art['id_user']; ?>" data-idcodeqr="<?php echo $art['id_register_qr']; ?>">
+							<i class="material-icons">input</i>
+						</a>
+
+					<?php else : ?>
+
+						<a class="btn_detail_return_article waves-effect waves-light btn-floating cyan tooltipped" data-position="left" data-delay="50" data-tooltip="Detalle Devoluci&oacute;n" href="javascript:void(0)" data-ownalien="<?php echo $art['own_alien']; ?>" data-idreturn="<?php echo $art['id_return']; ?>" data-idarticles="<?php echo $art['id']; ?>" data-iduser="<?php echo $art['id_user']; ?>" data-idcodeqr="<?php echo $art['id_register_qr']; ?>">
+							<i class="material-icons">info</i>
+						</a>
+
+					<?php endif; ?>
+					</td>
+
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Eliminar Art&iacute;culo" href="<?php echo $this->basePath('/articles/deletefound/') . $art["id_return"]; ?>" >
+							<i class="material-icons">delete_forever</i>
+						</a>
+					</td>
+
+					<td class="center">
+						<?php
+						$disableBtnPushNotification = '';
+
+						if ($returnDate != '' && $returnDate != '0000-00-00 00:00:00' && $returnDate != NULL) {
+							$disableBtnPushNotification = 'disabled';
+						}
+						?>
+
+						<!-- Validar si es un articulo ASIGNADO O NUEVO -->
+						
+						<?php
+						if ($art['own_alien'] == 1) :
+						?>
+
+						<!-- Validar si es articulo con codigo qr asignado y si ya fue devuelto -->
+						<a class="btn_push_notification_article waves-effect waves-light btn-floating yellow tooltipped" data-position="left" data-delay="50" data-tooltip="Recordatorio" href="javascript:void(0)" data-idpushnoti="<?php echo $art['id_push_noti']; ?>" <?php echo ($disableBtnPushNotification != '') ? $disableBtnPushNotification : ''; ?> >
+							<i class="material-icons">notifications_active</i>
+						</a>
+
+						<?php endif; ?>
+					</td>
+					
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+
+		</table>
+
+	</div>
+
+</div>
+
+<!-- Modal Structure -->
+<div id="modal_validate_pin" class="modal">
+	<div class="modal-content" style="padding-bottom: 4px !important;">
+	 <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s8">
+        <h4 class="center-align">N&uacute;mero PIN</h4>
+        </div>
+        </div>
+		
+		<p class="center-align">Para devolver el art&iacute;culo es necesario ingresar el n&uacute;mero pin.</p>          
+		<div class="row" style="margin-top: 20px;">
+			<div class="col s12 m12 l12">
+				<form id="form_validate_pin">
+					<input type="hidden" name="id_user" id="id_user">
+					<div class="row">
+						<div class="col s12 m6 l6 offset-m3 offset-l3">
+							<div class="input-field col s12 m12 l12">
+								<input id="pin" type="password" name="pin" class="validate" maxlength="4" data-validetta="required" data-vd-message-required="Ingresa el PIN">
+								<label for="pin">PIN</label>
+							</div>
+						</div>        
+					</div>
+					<div class="col s12 m6 l6 offset-m3 offset-l3">        
+						<div class="col s12 m6 l6">
+							<button type="submit" id="btn_validate_pin" class="waves-effect waves-light btn-large teal col s12">
+								Aceptar
+							</button>
+						</div>
+						<div class="col s12 m6 l6">
+							<a href="javascript:void(0)" id="btn_close_modal_pin" class="waves-effect waves-light btn-large red col s12">Cerrar</a>
+						</div>                 
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal_returns" class="modal">
+	<div class="modal-content" style="padding-bottom: 4px !important;">
+
+		<div class="row pagetitle-row" style="margin-left: 10px">
+          <div class="col s2">
+            <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+             style="with: 45px; height: 45px;" />
+          </div>
+        <div class="col s8">
+           <h4 class="center-align">Devolver un art&iacute;culo</h4>
+        </div>
+
+        </div>
+
+		
+      	<p>Ingresa los datos siguientes</p>
+
+		<div class="row"  style="margin-top: 20px;">
+			<form id="form_save_return_article" class="col s12">
+
+				<input type="hidden" id="id_return" name="id_return">
+				<input type="hidden" id="id_articles" name="id_articles">
+				<input type="hidden" id="id_code_qr" name="id_code_qr">
+      
+				<div class="row">
+        			<div class="input-field col s6">
+          				<input id="first_name_return" type="text" name="first_name_return" class="validate" data-validetta="required" data-vd-message-required="Ingresa el nombre">
+          				<label for="first_name_return">Nombre</label>
+        			</div>
+        			<div class="input-field col s6">
+          				<input id="last_name_return" type="text" name="last_name_return" class="validate" data-validetta="required" data-vd-message-required="Ingresa los apellidos">
+          				<label for="last_name_return">Apellidos</label>
+        			</div>
+      			</div>
+
+      			<div class="row">
+        			<div class="input-field col s6">
+          				<input id="phone_return" type="text" name="phone_return" class="validate" data-validetta="required" data-vd-message-required="Ingresa el número de tel.">
+          				<label for="phone_return">Tel&eacute;fono</label>
+        			</div>
+        			<div class="input-field col s6">
+          				<input id="email_return" type="text" name="email_return" class="validate" data-validetta="required" data-vd-message-required="Ingresa el correo electronico">
+          				<label for="email_return">Correo Electr&oacute;nico</label>
+        			</div>
+      			</div>
+
+				<!--<div class="row">
+					<div class="input-field col s12">
+						<textarea id="descrip_lend" class="materialize-textarea"></textarea>
+						<label for="descrip_return">Observaciones</label>
+					</div>
+				</div>-->
+
+				<div class="row">        
+					<div class="col s12 m6 l6">
+							<button type="submit" id="btn_save_return_article" class="waves-effect waves-light btn-large teal col s12">
+								Aceptar
+							</button>
+					</div>
+					<div class="col s12 m6 l6">
+						<a href="javascript:void(0)" id="btn_close_modal_return" class="waves-effect waves-light btn-large red col s12">Cerrar</a>
+					</div>                 
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+	<!--<div class="modal-footer">
+	</div>-->
+</div>
+
+<!-- Modal Structure -->
+<div id="modal_detail_return" class="modal">
+	<div class="modal-content" style="padding-bottom: 4px !important;">
+
+	<div class="row pagetitle-row" style="margin-left: 10px">
+          <div class="col s2">
+            <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+             style="with: 45px; height: 45px;" />
+          </div>
+        <div class="col s8">
+           <h4 class="center-align">Detalle Devoluci&oacute;n</h4>
+        </div>
+        
+        </div>
+		
+		<p class="center-align">Los datos mostrados corresponden a la persona a la que se entrego el art&iacute;culo.</p>          
+		<div class="row" style="margin-top: 20px;">
+			<div class="col s12 m12 l12">
+				<p id="detail_return_name" class="grey-text text-darken-2">Nombre:</p>
+				<p id="detail_return_phone" class="grey-text text-darken-2">Tel&eacute;fono:</p>
+				<p id="detail_return_email" class="grey-text text-darken-2">Correo Electr&oacute;nico:</p>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+    	<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-light btn-large red">Cerrar</a>
+    </div>
+</div>
+
+<script>
+
+	// Boton devolver articulo
+	var $btn_return_article        = $(".btn_return_article");
+
+	// BOTON DETALLE DE DEVOLUCION
+	var $btn_detail_return_article = $('.btn_detail_return_article');
+
+	// BOTON DE NOTIFICACION
+	var $btn_push_notification_article = $('.btn_push_notification_article');
+
+	// FORMULARIO DE PIN
+	var $form_validate_pin  = $("#form_validate_pin");
+
+	// FORMULARIO DEVOLVER ARTICULO
+	var $form_save_return_article = $("#form_save_return_article");
+
+	// BOTON PARA VALIDAR PIN
+	var $btn_validate_pin        = $("#btn_validate_pin");
+
+	// BOTON GUARDAR DEVOLUCION DE ARTICULO
+	var $btn_save_return_article = $("#btn_save_return_article");
+
+	// ***********************************************************************
+	// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+	// ***********************************************************************
+	$(document)
+		.ajaxStart(function () {
+			console.log("Inicia Ajax");
+
+			// Iniciamos panel de carga
+			$.LoadingOverlay("show");
+		})
+		.ajaxStop(function () {
+			console.log("Termina Ajax");
+
+			// ocultamos panel de carga
+			$.LoadingOverlay("hide");
+		});
+
+	// ***********************************************************************
+	// Cuando el documento esta listo
+	// ***********************************************************************
+	$(document).ready(function() {
+
+		// MODALES SE INICIALIZAN
+		$('.modal').modal({
+			dismissible: false,// Callback for Modal close
+		});
+
+		// ******************************************************************
+		// CLICK EN EL BOTON CERRAR MODAL DE PIN
+		// ******************************************************************
+		$('#btn_close_modal_pin').on('click', function(event) {
+			event.preventDefault();
+			// OCULTAMOS MODAL DE VALIDAR PIN
+			$("#modal_validate_pin").modal('close');
+
+			//LIMPIAMOS CAMPO
+			$('#pin').val('');
+			$('#pin').blur();
+			$('#pin').next().next().remove();
+			
+		});
+
+		// ******************************************************************
+		// CLICK EN EL BOTON CERRAR MODAL DE DEVOLVER ARTICULO
+		// ******************************************************************
+		$('#btn_close_modal_return').on('click', function(event) {
+			event.preventDefault();
+			// OCULTMOS MODAL DE DEVOLUCIONES
+			$("#modal_returns").modal('close');
+
+			// LIMPIAMOS CAMPOS
+			$('#first_name_return').val('');
+			$('#first_name_return').blur();
+			$('#first_name_return').next().next().remove();
+
+			$('#last_name_return').val('');
+			$('#last_name_return').blur();
+			$('#last_name_return').next().next().remove();
+
+			$('#phone_return').val('');
+			$('#phone_return').blur();
+			$('#phone_return').next().next().remove();
+
+			$('#email_return').val('');
+			$('#email_return').blur();
+			$('#email_return').next().next().remove();
+		});
+
+		// ******************************************************************
+		// CLICK EN EL BOTON DETALLE DE DEVOLUCION
+		// ******************************************************************
+		$btn_detail_return_article.on('click', function(event) {
+			//event.preventDefault();
+			
+			// ID DEVOLUCION
+			var $idReturnArticle = $(this).data('idreturn');
+			
+			$.ajax({
+				url: $basePath + '/articles/detailreturnarticle',
+				type: 'POST',
+				dataType: 'json',
+				data: {id_return : $idReturnArticle},
+			})
+			.done(function(response) {
+				//console.log(JSON.stringify(response));
+				//console.log("success");
+
+				// AGREGAMOS UN VALOR AL PARRAFO detail_return_name
+				$('#detail_return_name').text('Nombre: ' + response.data[0].name + ' ' + response.data[0].surname);
+
+				// AGREGAMOS UN VALOR AL PARRAFO detail_return_phone
+				$('#detail_return_phone').text('Teléfono: ' + response.data[0].phone);
+
+				// AGREGAMOS UN VALOR AL PARRAFO detail_return_email
+				$('#detail_return_email').text('Correo Electrónico: ' + response.data[0].email);
+
+				// MOSTRAMOS MODAL DE DETALLE DE DEVOLUCION
+				$('#modal_detail_return').modal('open');
+			})
+			.fail(function() {
+				//console.log("error");
+				swal(
+			  		'Opsss..',
+			  		'¡Ocurrio un error intentalo de nuevo!',
+			  		'error'
+				).catch(swal.noop);
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			
+
+		});
+
+		// ******************************************************************
+		// CLICK EN EL BOTON NOTIFICACION
+		// ******************************************************************
+		$btn_push_notification_article.on('click', function(event) {
+
+			//console.log("RECORDATORIO");
+			//event.preventDefault();
+			
+			// ID DEVOLUCION
+			var $idPushNotification = $(this).data('idpushnoti');
+
+			// MOSTRAMOS ALERTA
+            swal({
+                title: '¿Enviar Recordatorio?',
+				text: "Notificaras al usuario que encontraste su artículo",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Aceptar',
+				cancelButtonText: 'Cancelar',
+            }).then(function () {
+                //console.log("Enviar recordatorio");
+                
+                $.ajax({
+					url: $basePath + '/articles/rememberpushnotification',
+					type: 'POST',
+					dataType: 'json',
+					data: {id_push_notification : $idPushNotification},
+				})
+				.done(function(response) {
+					//console.log(JSON.stringify(response.articleReminderFound));
+
+					// Validar response
+					if (response.articleReminderFound.status == "ok") {
+						swal(
+		                    'Correcto',
+		                	'¡Recordatorio enviado!',
+		                   	'success'
+						).catch(swal.noop);
+					} else {
+						swal(
+					  		'Opsss..',
+					  		'¡Ocurrio un error intentalo de nuevo!',
+					  		'error'
+						).catch(swal.noop);
+					}
+				})
+				.fail(function() {
+					swal(
+				  		'Opsss..',
+				  		'¡Ocurrio un error intentalo de nuevo!',
+				  		'error'
+					).catch(swal.noop);
+				})
+				.always(function() {
+					//console.log("complete");
+				});
+
+            }, function (dismiss) {
+            	//console.log("No enviar recordatorio");
+            });
+
+		});
+
+		// ******************************************************************
+		// CLICK EN EL BOTON DEVOLVER ARTICULO
+		// ******************************************************************
+		$btn_return_article.on('click', function() {
+
+			// ARTICULO PROPIO O AJENO
+			var $own_alien = $(this).data('ownalien');
+
+			// VALIDAMOS SI ES UN ARTICULO ES PROPIO O AJENO
+			if ($own_alien == 1) {
+
+				// MOSTRAMOS MODAL DE VALIDAR PIN
+				$("#modal_validate_pin").modal('open');
+
+			} else{
+
+				// MOSTRAMOS LA MODAL DE DEVOLUCIONES
+				$("#modal_returns").modal('open');
+
+			};
+
+			// AGREGAMOS UN VALOR AL INPUT ID USER
+			$('#id_user').val($(this).data('iduser'));
+
+			// AGREGAMOS UN VALOR AL INPUT ID RETURN
+			$('#id_return').val($(this).data('idreturn'));
+
+			// AGREGAMOS UN VALORL AL INPU ID ARTICLES
+			$('#id_articles').val($(this).data('idarticles'));
+
+			// AGREGAMOS UN VALOR AL INPUT ID CODIGO QR
+			$('#id_code_qr').val($(this).data('idcodeqr'));
+
+		});
+
+		// FUNCION PARA VALIDAR EL PIN
+		function validatePin($fom)
+		{
+		}
+
+		// ******************************************************************
+		// VALIDAR FORMULARIO
+		// ******************************************************************
+		$form_validate_pin.validetta({
+        	bubblePosition: 'bottom',
+        	bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+        	realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				//console.log($('#pin').val().length);
+
+				//VALIDAMOS LA LONGITUD DEL PIN
+				if($('#pin').val().length < 4) {
+
+					swal(
+	                    'Opsss..',
+	                    '¡El PIN tiene que ser de 4 digitos!',
+	                    'error'
+					).catch(swal.noop);
+
+					return false;
+
+				} else {
+					$.ajax({
+						url: $basePath + '/articles/verifypinuser',
+						type: 'POST',
+						dataType: 'json',
+						data: $(this.form).serialize(),
+					})
+					.done(function(response) {
+						//console.log(JSON.stringify(response));
+						
+						// Validamos la respuesta
+						if (response.data[0].count == 1) {
+
+							// MOSTRAMOS LA MODAL DE DEVOLUCIONES
+							$("#modal_returns").modal('open');
+
+							// OCULTMOS MODAL DE VALIDAR PIN
+							$("#modal_validate_pin").modal('close');
+
+							//LIMPIAMOS CAMPO
+							$('#pin').val('');
+							$('#pin').blur();
+							$('#pin').next().next().remove();
+	                   
+						} else if(response.data[0].count == 0) {
+							swal(
+	                    		'Opsss..',
+	                    		'¡El PIN ingresado no es correcto!',
+	                    		'error'
+							).catch(swal.noop);
+						}
+
+					})
+					.fail(function() {
+						swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	               		//console.log("error");
+					})
+					.always(function() {
+	                	//console.log("complete");
+					});
+				};
+
+			}
+		});
+
+		// ******************************************************************
+		// VALIDAR FORMULARIO DEVOLVER ARTICULO
+		// ******************************************************************
+		$form_save_return_article.validetta({
+        	bubblePosition: 'bottom',
+        	bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+        	realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				//console.log($('#pin').val().length);
+
+				
+				$.ajax({
+						url: $basePath + '/articles/updatereturnarticle',
+						type: 'POST',
+						dataType: 'json',
+						data: $(this.form).serialize(),
+					})
+					.done(function(response) {
+						//console.log(JSON.stringify(response));
+						
+						// Validamos la respuesta
+						if (response.status == 'ok') {
+
+							swal(
+	                    		'Correcto',
+	                    		'¡El artículo fue devuelto!',
+	                    		'success'
+							).catch(swal.noop).then(function (result) {
+								
+								// OCULTMOS MODAL DE DEVOLUCIONES
+								$("#modal_returns").modal('close');
+
+								// LIMPIAMOS CAMPOS
+								$('#first_name_return').val('');
+								$('#first_name_return').blur();
+								$('#first_name_return').next().next().remove();
+
+								$('#last_name_return').val('');
+								$('#last_name_return').blur();
+								$('#last_name_return').next().next().remove();
+
+								$('#phone_return').val('');
+								$('#phone_return').blur();
+								$('#phone_return').next().next().remove();
+
+								$('#email_return').val('');
+								$('#email_return').blur();
+								$('#email_return').next().next().remove();
+
+								// Recargamos la pagina
+								location.reload();
+
+							});
+
+	                   
+						} else if(response.status == 'fail') {
+							swal(
+	                    		'Opsss..',
+	                    		'¡El PIN ingresado no es correcto!',
+	                    		'error'
+							).catch(swal.noop);
+						}
+
+					})
+					.fail(function() {
+						swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	               		//console.log("error");
+					})
+					.always(function() {
+	                	//console.log("complete");
+					});
+				
+
+			}
+		});
+
+		// ******************************************************************
+		// PLUGIN DATA TABLE JQUERY
+		// ******************************************************************
+	    $('#table_articles').DataTable({
+      		"language": {
+            	"sProcessing":     "Procesando...",
+            	"sLengthMenu":     "Mostrar _MENU_ registros",
+            	"sZeroRecords":    "No se encontraron resultados",
+            	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+            	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            	"sInfoPostFix":    "",
+            	"sSearch":         "Buscar:",
+            	"sUrl":            "",
+            	"sInfoThousands":  ",",
+            	"sLoadingRecords": "Cargando...",
+            	"oPaginate": {
+            	    "sFirst":    "Primero",
+            	    "sLast":     "Último",
+            	    "sNext":     "Siguiente",
+            	    "sPrevious": "Anterior"
+            	},
+            	"oAria": {
+            	    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            	    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            	}
+			},
+			"columnDefs" : [{
+      			"targets": [ 7, 8, 9, 10 ],
+      			"orderable": false
+    		}]
+	    });
+
+	   	$("#table_articles_length select").val('10'); //seleccionar valor por defecto del select
+		$('#table_articles_length select').addClass("browser-default"); //agregar una clase de materializecss de esta forma ya no se pierde el select de numero de registros.
+		$('select').material_select(); //inicializar el select de materialize
+
+	});
+</script>

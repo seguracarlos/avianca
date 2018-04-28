@@ -1,0 +1,880 @@
+<!--<link rel="stylesheet" href="<?php //echo $this->basePath('/pegalinaslive/jQuery-autoComplete-master/jquery.auto-complete.css'); ?>">
+
+<script src="<?php //echo $this->basePath('/pegalinaslive/jQuery-autoComplete-master/jquery.auto-complete.js'); ?>"></script>-->
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery.formatCurrency-1.4.0/jquery.formatCurrency-1.4.0.min.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+</style>
+
+<div class="row">
+
+	<div class="col s12 m12 l12 left-align" style="margin-bottom: 35px;">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Registra tu art&iacute;culo</h3><br>
+	</div>
+
+	<!-- FORMULARIO DE CODIGO QR -->
+	<div id="container_form_code_qr" class="col s12 m12 l12">
+		
+		<div class="card-panel">
+
+			<div class='circle-icon'>
+				<i class="material-icons fa fa-qrcode"></i>
+			</div>
+			
+
+			<?php 
+			$formQR = $this->formQR;
+			$formQR->prepare();
+			echo $this->form()->openTag($formQR);
+			?>
+
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa el codigo que esta en tu pegalina.</h4>
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12 m12 l12">
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('code_article')); ?>
+							<label for="code_article">C&oacute;digo</label>
+						</div>
+
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('repeat_code_article')); ?>
+							<label for="repeat_code_article">Repetir C&oacute;digo</label>
+						</div>
+					</div>
+
+
+				</div>
+
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						<div class="col s6 m6 l6">
+							<button type="submit" id="btn_validate_codeQR" class="waves-effect waves-light btn-large teal col s12 m12 l12">Enviar</button>
+							<?php //echo $this->formElement($form->get('submitbutton')); ?>
+						</div>
+
+						<div class="col s6 m6 l6">
+							<a id="btn_cancel_validate_codeQR" href="<?php echo $this->basePath()."/articles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($formQR); ?>
+
+		</div>
+
+
+	</div>
+
+	<!-- FORMULARIO DE ARTICULO -->
+	<div id="container_form_articles" class="col s12 m12 l12" style="display: none;">
+		
+		<div class="card-panel">
+
+			<div class='circle-icon'>	
+				<i class="material-icons">description</i>   
+			</div>
+
+			<?php 
+			$form = $this->form;
+			$form->prepare();
+			echo $this->form()->openTag($form);
+			echo $this->formElement($form->get('id'));
+			echo $this->formElement($form->get('id_register_qr'));
+			?>
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos de tu art&iacute;culo.</h4>
+				</div>
+
+				<div class="row">
+
+					<div class="col s12 m12 l6">
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('asignated_to')); ?>
+							<label for="asignated_to">Asignado a:</label>
+						</div>
+						<div class="input-field col s12 m12 l12" style="display:none;">
+							<?php echo $this->formElement($form->get('event_articles')); ?>
+							<label for="event_articles">Evento:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('category')); ?>
+							<label for="category">Categor&iacute;a:</label>
+						</div>
+
+						<div style="display: none;" id="container_clothes_size" class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('clothes_size')); ?>
+							<label for="clothes_size">Talla:</label>
+						</div>
+
+						<div id="container_name_article" class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('name_article')); ?>
+							<label for="name_article">Art&iacute;culo:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('brand')); ?>
+							<label for="brand">Marca:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('color')); ?>
+							<label for="color">Color:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('model_serie')); ?>
+							<label for="model_serie">Modelo / N&uacute;mero de serie:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('reward')); ?>
+							<label for="reward">Recompensa $:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('description')); ?>
+							<label for="description">Descripci&oacute;n:</label>
+						</div>
+						
+					</div>
+
+					<div class="col s12 m12 l6">
+
+						<div class="file-field input-field col s12 m12 l12">
+
+		      				<div class="btn">
+		        				<span>Imagen 1</span>
+		        				<!--<input type="file" name="imageone">-->
+		        				<?php echo $this->formElement($form->get('imageone')); ?>
+		      				</div>
+
+		      				<div class="file-path-wrapper">
+		        				<input class="file-path validate" type="text">
+		      				</div>
+
+		      				<div id="container_image_one" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+		      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image_one" src="<?php echo $this->basePath('img/icon_article_real.png'); ?>">	
+		      				</div>
+
+		    			</div>
+
+		    			<div class="file-field input-field col s12 m12 l12">
+
+		      				<div class="btn">
+		        				<span>Imagen 2</span>
+		        				<!--<input type="file" name="imagetwo">-->
+		        				<?php echo $this->formElement($form->get('imagetwo')); ?>
+		      				</div>
+
+		      				<div class="file-path-wrapper">
+		        				<input class="file-path validate" type="text">
+		      				</div>
+
+		      				<div id="container_image_two" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+		      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image_two" src="<?php echo $this->basePath('img/icon_article_real.png'); ?>">	
+		      				</div>
+
+		    			</div>
+						
+					</div>
+					
+					
+
+
+				</div>
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						
+						<div class="col s12 m6 l6">
+							<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+							<?php //echo $this->formElement($form->get('submitbutton')); ?>
+						</div>
+
+
+						<div class="col s12 m6 l6">
+							<a href="<?php echo $this->basePath()."/articles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+						
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($form); ?>
+
+		</div>
+
+	</div>
+
+	<!-- FORMULARIO DE MASCOTA -->
+	<div id="container_form_pets" class="col s12 m12 l12" style="display: none;">
+
+		<div class="card-panel">
+
+			<div class='circle-icon'>	
+				<i class="material-icons">description</i>   
+			</div>
+
+			<?php 
+			$form = $this->form;
+			$form->prepare();
+			echo $this->form()->openTag($form);
+			echo $this->formElement($form->get('id'));
+			echo $this->formElement($form->get('id_register_qr'));
+			?>
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos de tu mascota.</h4>
+				</div>
+
+				<div class="row">
+
+					<div class="col s12 m12 l6">
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('type_pet')); ?>
+							<label for="type_pet">Tipo de mascota:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('name_pet')); ?>
+							<label for="name_pet">Nombre:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('breed_pet')); ?>
+							<label for="breed_pet">Raza:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('color_pet')); ?>
+							<label for="color_pet">Color:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('size_pet')); ?>
+							<label for="size_pet">Talla:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('age_pet')); ?>
+							<label for="age_pet">Edad:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('description_pet')); ?>
+							<label for="description_pet">Descripci&oacute;n:</label>
+						</div>
+						
+					</div>
+
+					<div class="col s12 m12 l6">
+
+						<div class="file-field input-field col s12 m12 l12">
+
+		      				<div class="btn">
+		        				<span>Imagen de mascota</span>
+		        				<?php echo $this->formElement($form->get('img_pet')); ?>
+		      				</div>
+
+		      				<div class="file-path-wrapper">
+		        				<input class="file-path validate" type="text">
+		      				</div>
+
+		      				<div id="container_img_pet" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+		      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_img_pet" src="https://canna-pet.com/wp-content/plugins/ajax-search-pro/img/default.jpg">	
+		      				</div>
+
+		    			</div>
+						
+					</div>
+
+				</div>
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						
+						<div class="col s12 m6 l6">
+							<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+						</div>
+
+
+						<div class="col s12 m6 l6">
+							<a href="<?php echo $this->basePath()."/articles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+						
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($form); ?>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+
+// Formulario
+var $form_articles = $("#articles");
+
+// Formulario
+var $form_QR       = $("#form_codeqr");
+
+// Codigo del QR
+var $code_qr_article        = $("#code_article");
+
+// Codigo del QR
+var $repeat_code_qr_article = $("#repeat_code_article");
+
+// container_form_articles
+var $container_form_articles = $("#container_form_articles");
+
+// btn_validate_codeQR
+var $btn_validate_codeQR = $("#btn_validate_codeQR");
+
+// btn_cancel_validate_codeQR
+var $btn_cancel_validate_codeQR = $("#btn_cancel_validate_codeQR");
+
+// id_register_qr
+var $id_register_qr = $("#id_register_qr");
+
+// CONTENEDOR DEL FORMULARIO QR
+var $container_form_code_qr = $("#container_form_code_qr");
+
+// NOMBRE ARTICULO
+var $name_article = $("#name_article");
+
+// CATEGORIA
+var $category     = $("#category");
+
+// clothes_size
+var $clothes_size = $("#clothes_size");
+
+// container_clothes_size
+var $container_clothes_size =$("#container_clothes_size");
+
+// ***********************************************************************
+// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+// ***********************************************************************
+$(document)
+	.ajaxStart(function () {
+		console.log("Inicia Ajax");
+
+		// Iniciamos panel de carga
+		$.LoadingOverlay("show");
+	})
+	.ajaxStop(function () {
+		console.log("Termina Ajax");
+
+		// ocultamos panel de carga
+		$.LoadingOverlay("hide");
+	});
+
+// ***********************************************************************
+// Cuando el documento esta listo
+// ***********************************************************************
+$(document).ready(function() {
+
+	// ***********************************************************************
+	// INICIALIZAMOS LOS COMBOS
+	// ************************************************************************
+	$('#category, #clothes_size, #color, #name_article').material_select(); //inicializar el select de materialize
+
+	// ************************************************************************
+	// PERMITIR SOLO NUMEROS EN EL CAMPO RECOMPENSA
+	// ************************************************************************
+	$("#reward").keyup(function (e){
+		//this.value = (this.value + '').replace(/[^0-9-.]/g, '');
+ 		this.value = (this.value).replace(/[^0-9-.]/g, '');
+ 		//console.log(this.value + '');
+		/*if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			return false;
+		};*/
+	});
+
+	// ************************************************************************
+	// FORMATO MONEDA EL CAMPO RECOMPENSA
+	// ************************************************************************
+	$('#reward').blur(function(){
+		$('#reward').formatCurrency({ colorize:true });
+	});
+
+	// ************************************************************************
+	// CAMBIO EN EL CAMPO DE CATEGORIA
+	// ************************************************************************
+	$category.on('change', function(e){
+
+		// Valor del elemento sseleccionado
+		var $valCat  = $(this).val();
+		console.log("Valor de la categoria: " + $valCat);
+		// Texto del elemento seleccionado
+		var $txtCat  = $( "#category option:selected" ).text();
+
+		// Si la categoria es diferente de vacio
+		if ($valCat != "") {
+
+			// Validamos el tipo de categoria
+			if ($valCat == 1 && $txtCat == "Ropa") {
+
+				// FUNCION QUE GENERA LAS OPCIONES DEL SELECT NOMBRE
+				getNameArticlesByIdCategory($valCat);
+
+				// Mostramos la talla
+				$container_clothes_size.show();
+
+				// Agregamos atributo de requerido
+				$clothes_size.attr('data-validetta', 'required');
+
+				// Agregamos un mensaje al atributo
+				$clothes_size.attr('data-vd-message-required', 'Por favor ingresa la talla!');
+
+				$('#clothes_size').val("");
+	        	$('#clothes_size').material_select();
+
+	        	// Limpiamos el campo de nombre
+	        	//$name_article.val("");
+
+			} else if($valCat == 65 || $txtCat == "Varios" || $txtCat == "varios") {
+
+				/***********************************************/
+				// MODIFICAMOS EL TIPO DE CAMPO DE SELECT INPUT
+				/***********************************************/
+
+				// Eliminamos el combo y creamos una caja de texto
+				$('#container_name_article').html('<input name="name_article" id="name_article" class="validate" type="text" value="" data-validetta="required" data-vd-message-required="Ingresa el artículo" /><label for="name_article">Artículo</label>');
+
+				// Ocultamos la talla
+				$container_clothes_size.hide();
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-validetta');
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-vd-message-required');
+
+				$('#clothes_size').val("");
+	        	$('#clothes_size').material_select();
+
+			} else {
+
+				// FUNCION QUE GENERA LAS OPCIONES DEL SELECT NOMBRE
+				getNameArticlesByIdCategory($valCat);
+
+				// Ocultamos la talla
+				$container_clothes_size.hide();
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-validetta');
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-vd-message-required');
+
+				$('#clothes_size').val("");
+	        	$('#clothes_size').material_select();
+
+	        	// Limpiamos el campo de nombre
+	        	//$name_article.val("");
+
+			}
+
+		} else {
+
+			// Quitamos el focus
+			//$name_article.blur();
+
+			// LIMPIAMOS EL SELECT DE NOMBRE DE ARTICULO
+			$('#name_article')
+				.empty()
+				.append('<option selected="selected" value="">Selecciona un artículo</option>');
+
+			// Agregamos el focus
+			//$name_article.focus();
+
+			// Seteamos por default una opcion
+			$('#name_article').val("");
+
+			// Anadimos atributo requerido
+			$("#name_article").attr({
+				'data-validetta': 'required',
+				'data-vd-message-required': 'Ingresa el artículo'
+			});
+
+			// Inicializamos nuevamente el select de nombre de articulo
+			$('#name_article').material_select();
+
+		}
+
+	});
+
+	/*$name_article.on('change', function(event) {
+		event.preventDefault();
+		if ($(this).val() == "") {
+			$(this).focus();
+			return false;
+		}
+		
+	});*/
+
+	// ************************************************************************
+	// funcion que obtiene los nombres de los articulos dependiendo la catgoria
+	// ************************************************************************
+	function getNameArticlesByIdCategory($id_category)
+	{
+		// Creamos un select dinamico
+		$name_article_dynamic = $('<select class="validate" name="name_article" id="name_article" data-validetta="required" data-vd-message-required="Ingresa el artículo"><option name="name_article" selected="selected" value="">Selecciona un artículo</option></select><label for="name_article">Art&iacute;culo:</label>');
+
+		// Agregamos al contenedor el select
+		$('#container_name_article').html($name_article_dynamic).promise().done(function(){
+
+			// Inicializamos el combo
+			$('#name_article').material_select();
+
+			$.ajax({
+				url: $basePath + '/articles/getallsubcategorys',
+				type: 'POST',
+				dataType: 'json',
+				data: {id_parent: $id_category},
+			})
+			.done(function(response) {
+				//console.log("success");
+				//console.log(JSON.stringify(response));
+
+				// Quitamos el focus
+				//$name_article.blur();
+
+				// LIMPIAMOS EL SELECT DE NOMBRE DE ARTICULO
+				/*$('#name_article')
+					.empty()
+					.append('<option name="name_article" selected="selected" value="">Selecciona un artículo</option>');*/
+
+				// Agregamos el focus
+				//$name_article.focus();
+
+				// LLENAMOS DINAMICAMENTE EL COMBO DE ARTICULO
+				$.each(response.subCategorys, function(index, el) {
+					$('#name_article').append('<option value="'+el.id+'">'+el.namecategory+'</option>');
+				});
+
+				// Seteamos por default una opcion
+				$('#name_article').val("");
+
+				// Inicializamos nuevamente el select de nombre de articulo
+				$('#name_article').material_select();
+
+			})
+			.fail(function() {
+				//console.log("error");
+			})
+			.always(function() {
+				//console.log("complete");
+			});
+
+     	});
+		
+	}
+
+	// Autocompletar el campo de nombre
+	/*$name_article.autoComplete({
+		minChars: 1,
+		cache : false,
+		source: function(term, response){
+			term = term.toLowerCase();
+
+        	$.ajax({
+    			url: $basePath +'/articles/getallsubcategorys',
+    			type: 'POST',
+    			data: { q : term, id : $category.val()},
+    			dataType: "json",  // without `data` working correctly
+    			success: function (data) {
+
+    				console.log(JSON.stringify(data.subCategorys));
+
+    				var suggestions = [];
+
+    				$.each(data.subCategorys,function(item, value){
+    					if (~value.namecategory.toLowerCase().indexOf(term))
+    					suggestions.push(value.namecategory);
+    					response(suggestions);
+    				});
+
+	    		},
+		    	onSelect: function(e, term, item){
+	        		e.preventDefault();
+	    		}
+			});
+    	}
+	});*/
+
+
+	// ***********************************************************************
+	// FUNCION QUE GENERA UNA PREVIEW DE LA IMAGEN
+	// ***********************************************************************
+	function previewImgArticle(input, img_art) {
+
+		if (typeof (FileReader) != "undefined") {
+
+			var image_preview = $("#"+img_art);
+
+			// Limpiar img preview
+	 		image_preview.empty();
+
+	 		var reader = new FileReader();
+
+            reader.onload = function (e) {
+                image_preview.attr('src', e.target.result);
+            }
+            //image_holder.show();
+            reader.readAsDataURL(input.files[0]);
+
+ 		} else {
+            alert("Este navegador no admite FileReader.");
+        }
+	}
+
+	// ***********************************************************************
+	// Al hacer un cambio en el input imagen 2
+	// ***********************************************************************
+    $("#imagetwo").change(function () {
+    	// LLamamos a la funcion
+        previewImgArticle(this,"preview_image_two");
+    });
+
+	// ***********************************************************************
+    // Al hacer un cambio en el input imagen 1
+	// ***********************************************************************
+	$("#imageone").on('change', function () {
+		// LLamamos a la funcion
+        previewImgArticle(this,"preview_image_one");
+        /*if (typeof (FileReader) != "undefined") {
+
+            var image_holder = $("#preview_image_one");
+            image_holder.empty();
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                image_holder.attr('src', e.target.result);
+
+            }
+            //image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("Este navegador no admite FileReader.");
+        }*/
+    });
+
+	// ***********************************************************************
+	// VALIDAR FORMULARIO DE ARTICULOS
+	// ***********************************************************************
+	$form_articles.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/add',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			//console.log(response);
+	        			console.log("success");
+
+						// VALIDAMOS LA RESPUESTA
+	        			if (response.status == 'ok') {
+
+							// Redireccionamos a la vista de articulos
+	        				window.location = $basePath + '/articles';
+							
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+						swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+        	}
+	});
+
+	// ***********************************************************************
+	// VALIDAR FORMULARIO DE CODIGOS QR
+	// ***********************************************************************
+	$form_QR.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+
+					//$.LoadingOverlay("show");
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/validatecodeqr',
+	        			type: 'POST',
+	        			dataType: 'json',
+	        			data: $(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+
+						//$.LoadingOverlay("hide");
+	        			//console.log(response);
+	        			//console.log("success");
+	        			if (response.data[0]['count'] == 1) {
+
+							// VALIDAMOS QR (ARTICULOS - MASCOTAS)
+							if(response.data[0].type_qr == 1) {
+
+								// Validamos el status
+								if (response.data[0]['id_status'] == 1) {
+
+									//window.location = $basePath + '/articles';
+									swal(
+										'Correcto..',
+										'¡El código ingresado es valido!',
+										'success'
+									);
+
+									$container_form_articles.show("slow");
+
+									$code_qr_article.prop("disabled", true);
+
+									$repeat_code_qr_article.prop("disabled", true);
+
+									$btn_validate_codeQR.prop("disabled", true);
+
+									$btn_cancel_validate_codeQR.attr("disabled", true);
+
+									// Añadimos un valor al campo $id_register_qr
+									$id_register_qr.val(response.data[0]['id']);
+
+									// OCULTAMOS EL CONTENEDOR DEL FORM CODIGO QR
+									$container_form_code_qr.slideUp();
+
+								} else {
+									
+									swal(
+										'Opsss..',
+										'¡El código ingresado ya esta asignado!. Intenta con otro.',
+										'info'
+									).catch(swal.noop);
+								}
+
+							} else if(response.data[0].type_qr == 2) {
+								swal(
+									'Opsss..',
+									'¡El código ingresado es para agregar una mascota!. Intenta con otro.',
+									'warning'
+								).catch(swal.noop);
+							} else {
+								swal(
+									'Opsss..',
+									'¡El código ingresado no es valido!',
+									'warning'
+								).catch(swal.noop);
+							}
+
+	        			} else if(response.data[0]['count'] == 0) {
+	        				swal(
+			  					'Opsss..',
+			  					'¡El código ingresado no es valido!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			//console.log("error");
+						swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+        	}
+	});
+
+});
+	
+</script>

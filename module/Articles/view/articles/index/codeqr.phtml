@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/icons/favicons/icono app.ico')); ?>
+    
+	<title>Recupera</title>
+
+	<!-- Stylesheet -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,400italic,500,300italic,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="<?php echo $this->basePath('css/ionicons.min.css" rel="stylesheet');?>" type="text/css">
+    <link href="<?php echo $this->basePath('css/materialize.min.css');?>" rel="stylesheet">
+    <link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+    <link type="text/css" rel="stylesheet" href="<?php echo $this->basePath('/pegalinaslive/sweetalert2/sweetalert2.min.css'); ?>" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+
+    <script src="<?php echo $this->basePath('js/modernizr.custom.js');?>"></script>
+    <!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/materialize/js/materialize.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/sweetalert2/sweetalert2.min.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+	<script src="<?php echo $this->basePath('/pegalinaslive/jquery.formatCurrency-1.4.0/jquery.formatCurrency-1.4.0.min.js'); ?>"></script>
+	<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+	<style>
+		.nav-wrapper .brand-logo img {
+			height: 64px;
+			margin-left: 40px;
+		}
+		@media (max-width: 600px) {
+			.nav-wrapper .brand-logo img {
+				height: 56px;
+			}
+		}
+		.footer-main {
+			padding-top: 80px;
+			padding-bottom: 30px;
+			background-color: #263238;
+		}
+		.footer-main a img {
+    		width: 280px;
+		}
+		.footer-social {
+    		margin: 30px 0;
+    		padding: 0;
+		}
+		.footer-social li {
+    position: relative;
+    display: inline-block;
+    margin: 0 3px;
+}
+.footer-social li a i {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #37474f;
+    color: #bdbdbd;
+    font-size: 20px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+}
+		.copyrights {
+    		display: block;
+    		color: #bdbdbd;
+    		font-weight: 300;
+		}
+		hr {
+    		border-top: 2px solid #03a9f4;
+    		border-bottom: 2px solid #8cb400;
+    		border-left: none;
+    		border-right: none;
+    		height: 6px;
+		}
+	</style>
+
+</head>
+<body>
+	
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper white">
+				<a href="<?php echo $this->basePath('/'); ?>" class="brand-logo">
+					<img src="<?php echo $this->basePath('img/Recupera by 667x152px.png'); ?>" alt="logo recupera">
+				</a>
+			</div>
+		</nav>
+	</div>
+
+	<div class="row box_anim">
+
+		<div class="col s12 m12 l12">
+
+			<h3 class="center-align grey-text text-darken-2">Parece que encontraste un art&iacute;culo</h3>
+			<p class="center-align grey-text text-darken-2">Envia un mensaje al due&ntilde;o del art&iacute;culo para que este enterado y pueda contactarte.</p>
+			<p class="center-align blue-text text-darken-2">Art&iacute;culo asignado a: <span id="asignated_to"></span></p>
+			
+		</div>
+
+		<div class="col s12 m8 l8  offset-m2 offset-l2">
+			
+			<form id="form_article_found" method="POST" action="#" class="col s12 m12 l12">
+
+				<!--<input type="hidden" id="data_article" name="data_article">-->
+				<input type="hidden" id="id_article" name="id_article">
+	            <input type="hidden" id="id_code_qr" name="id_code_qr">
+	            <input type="hidden" id="email_owner" name="email_owner">
+	            <input type="hidden" id="id_user" name="id_user">
+				
+				<div class="row">
+
+					<div class="input-field col s12 m6 l6">
+	          			<input id="name_p" type="text" class="validate" name="name_p" data-validetta="required" data-vd-message-required="Ingresa tu nombre" />
+	          			<label for="name_p">Nombre</label>
+
+	        		</div>
+
+	        		<div class="input-field col s12 m6 l6">
+	          			<input id="phone_p" type="text" class="validate" name="phone_p" data-vd-message-required="Ingresa tu teléfono" />
+	          			<label for="phone_p">Tel&eacute;fono</label>
+
+	        		</div>
+
+	        		<div class="input-field col s12 m6 l6">
+	          			<input id="email_p" type="text" class="validate" name="email_p" data-validetta="required" data-vd-message-required="Ingresa tu correo electrónico" />
+	          			<label for="email_p">Correo Electr&oacute;nico</label>
+
+	        		</div>
+
+	        		<div id="div_phone_u"  class="input-field col s12 m6 l6 " style="display:none;">
+	                    <input style="color:blue" id="phone_u" type="text" class="validate" name="phone_u" placeholder="Telefono" disabled="disabled" />
+	                    <label style="color:blue" for="phone_u">Tel&eacute;fono del propietario del art&iacute;culo</label>
+	                </div>
+
+	                <!--<div id="div_rew"  class="input-field col s12 m6 l6" >
+	                </div>-->
+
+	                <div id="div_reward"  class="input-field col s12 m6  offset-m6 l6 offset-l6" style="display:none;">
+	                    <input style="color:red" type="text" id="reward" class="validate" disabled="disabled" /> 
+	                    <label style="color:red" for="reward">Este art&iacute;culo cuenta con recompensa</label>
+	                </div>
+	        		
+	        		<div class="input-field col s12 m12 l12">          			
+	          			<textarea id="comment_p" class="materialize-textarea" name="comment_p" data-validetta="required" data-vd-message-required="Ingresa algún comentario">Hola, encontre tu art&iacute;culo. Cont&aacute;ctame!</textarea>
+						<label for="comment_p">Comentario</label>
+
+	        		</div>
+
+	        		<div class="input-field col s12 m12 l12">
+	  					<button type="submit" class="waves-effect waves-light btn-large teal col s12 m12 l12">
+							<!--<i class="material-icons left">send</i>--> Enviar
+						</button>
+	        		</div>
+
+	      		</div>
+
+			</form>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="footer-main">
+		<div class="container">
+                <div class="row">
+                    <div class="col s12 m8 l8 offset-m2 offset-l2 center">
+                        <!-- Replace 'src' attribute with the path to your Brand logo -->
+                        <a href="<?php echo $this->basePath('/auth'); ?>"><img src="<?php echo $this->basePath('img/icons/Recupera By.png'); ?>" alt="logo recupera"></a>
+                        <div class="clearfix"></div>
+                        <ul class="list-inline footer-social">
+                            <!-- Add links to your social profiles here -->
+                            <li><a href="https://www.facebook.com/Pegalinas/" target="_blank"><i class="ion-social-facebook waves-effect waves-light"></i></a></li>
+                            <li><a href="https://twitter.com/pegalinas" target="_blank"><i class="ion-social-twitter waves-effect waves-light"></i></a></li>
+                            <li><a href="https://www.youtube.com/user/pegalinas" target="_blank"><i class="ion-social-youtube waves-effect waves-light"></i></a></li>
+                        </ul>
+                        <hr>
+                        <span class="copyrights">&copy; Recupera, Todos los derechos reservados <a class="_m4qul" href="<?php echo $this->basePath('/Documents/Política de privacidad Recupera.net.pdf')?>" target="_blank">Política de privacidad</a></p>y <a  href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>" target="_blank">Condiciones</a></span>
+                    </div>
+                </div>
+		</div><!-- Container ends -->
+	</footer><!-- Footer ends -->
+
+	<script>
+
+	// *****************************************************
+	// VALIDAR SI SE PUEDE OBTENER LA UBICACION 
+	// *****************************************************
+	if ("geolocation" in navigator) {
+		/* geolocation is available */
+		console.log('Geolocalización está disponible');
+	} else {
+		/* geolocaiton IS NOT available */
+		console('La geolocalización no está disponible');
+	}
+
+	// BasePath
+    var $basePath           = '<?php echo $this->basePath(); ?>';
+
+	// Datos validar codigo QR
+	var $validateCodeQR = '<?php echo $this->validateCodeQR; ?>';
+
+	// Formulario 
+	var $form_article_found = $('#form_article_found');
+	
+	// DATOS DEL ARTICULO
+	//var $article            = '<?php //echo $this->articleByCodeQr; ?>';
+
+	// *****************************************************
+	// CORRECTO AL OBTENER UBICACION
+	// *****************************************************
+	function success(position) {
+    	var latitude  = position.coords.latitude;
+    	var longitude = position.coords.longitude;
+
+    	console.log("Latitude: " + latitude + " Longitude: " + longitude);
+
+    	// OBJETO CON LOS DATOS DE LA UBICACION
+    	var $objDataLocationArticle = {
+    		id_articles : $("#id_article").val(),
+    		latitude    : latitude,
+    		longitude   : longitude,
+    		addres      : ""
+    	};
+
+    	//console.log("objDataLocationArticle: " + JSON.stringify($objDataLocationArticle));
+
+    	// LLAMAMOS A LA FUNCION QUE GUARDAR LA UBICACION DEL ARTICULO
+    	saveLastLocationArticle($objDataLocationArticle);
+
+    	//output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+    	//var img = new Image();
+    	//img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+    	//output.appendChild(img);
+	};
+
+	// *****************************************************
+	// ERROR AL OBTENER UBICACION
+	// *****************************************************
+  	function error() {
+    	//output.innerHTML = "Unable to retrieve your location";
+    	console.log("No se puede recuperar tu ubicación");
+
+    	// OBJETO CON LOS DATOS DE LA UBICACION
+    	var $objDataLocationArticleNot = {
+    		id_articles : $("#id_article").val(),
+    		latitude    : 0,
+    		longitude   : 0,
+    		addres      : ""
+    	};
+
+    	// LLAMAMOS A LA FUNCION QUE GUARDAR LA UBICACION DEL ARTICULO
+    	saveLastLocationArticle($objDataLocationArticleNot);
+  	};
+
+	// *****************************************************
+	// GUARDAR LA UBICACION DE LA PERSONA QUE ESCANEA EL CODIGO
+	// *****************************************************
+	function saveLastLocationArticle($dataLocation)
+	{
+		//console.log("VOY A GUARDAR TU UBICACION");
+		//console.log("dataLocation: " + JSON.stringify($dataLocation));
+		
+		$.ajax({
+			url      : $basePath + '/articles/savelastlocation',
+			type     : 'POST',
+			dataType : 'json',
+			data     : JSON.stringify($dataLocation),
+		})
+		.done(function(response) {
+				
+			console.log(JSON.stringify(response));
+
+		})
+		.fail(function() {
+			console.log("error!!!");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+	};
+
+	// ***********************************************************************
+	// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+	// ***********************************************************************
+	$(document)
+		.ajaxStart(function () {
+			console.log("Inicia Ajax");
+
+			// Iniciamos panel de carga
+			$.LoadingOverlay("show");
+		})
+		.ajaxStop(function () {
+			console.log("Termina Ajax");
+
+			// ocultamos panel de carga
+			$.LoadingOverlay("hide");
+		});
+
+	// ***********************************************************************
+	// CARGA DEL DOCUMENTO
+	// ***********************************************************************
+	jQuery(document).ready(function($) {
+
+		// OBTENEMOS UBICACION
+		navigator.geolocation.getCurrentPosition(success, error);
+
+		// PARSEAMOS OBJETO VALIDAR QR
+		var $parseJsonQR = JSON.parse($validateCodeQR);
+
+		// Asignado a 
+		var $asignated_to = $parseJsonQR.asignated_to;
+
+		// VALIDAMOS SI EL ARTICULO ESTA ASIGNADO A ALGUIEN
+		if ($asignated_to != "" && $asignated_to != null) {
+			
+			// ASIGNAMOS UN VALOR AL CAMPO asignated_to
+			$("#asignated_to").text($asignated_to);
+
+		} else {
+
+			// ASIGNAMOS UN VALOR AL CAMPO asignated_to
+			$("#asignated_to").text("Sin asignar");
+
+		};
+
+		// AGREGAMOS UN VALOR AL INPUT email_owner
+		$("#email_owner").val($parseJsonQR.email_owner);
+
+		// AGREGAMOS UN VALOR AL INPUT id_user
+		$("#id_user").val($parseJsonQR.id_user);
+
+		// *****************************************************
+		// AGREGAMOS UN VALOR AL INPUT id_article
+		// *****************************************************
+		$("#id_article").val($parseJsonQR.id_article);
+
+		// *****************************************************
+		// AGREGAMOS UN VALOR AL INPUT id_code_qr
+		// *****************************************************
+		$("#id_code_qr").val($parseJsonQR.id);
+
+		// *****************************************************
+		// VALIDAMOS SI EXISTE RECOMPENSA
+		// *****************************************************
+		if ($parseJsonQR.reward != 0 && $parseJsonQR.reward != "" && $parseJsonQR.reward != null) { 
+			// Mostramos DIV
+			$('#div_reward').show();
+        	
+        	//console.log("reward: " + $parseJsonQR.reward);
+			// Asignar recompensa
+			$('#reward').val($parseJsonQR.reward).formatCurrency();
+
+		};
+
+		// *****************************************************
+		// VALIDAMOS SI EXISTE TELEFONO DE DUEÑO
+		// *****************************************************
+		if ($parseJsonQR.phone_users != "" && $parseJsonQR.phone_users != null) { 
+		 	// Mostramos DIV
+			$('#div_phone_u').show();
+                            
+			// Asignar telefono
+			$('#phone_u').val($parseJsonQR.phone_users);
+
+			// Anadimos focus
+			//$("#phone_u").focus();
+		};
+
+		// AÑADIMOS DATOS AL INPUT
+		//$('#data_article').val($article);
+
+		// *****************************************************
+		// VALIDAMOS EL ARTICULO
+		// *****************************************************
+		$form_article_found.validetta({
+			bubblePosition: 'bottom',
+        	bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+        	realTime : true,
+        	onValid : function( event ) {
+
+				event.preventDefault();
+
+				$.ajax({
+					url      : $basePath + '/articles/codeqr',
+					type     : 'POST',
+					dataType : 'json',
+					data     : $(this.form).serialize(),
+				})
+				.done(function(response) {
+					console.log(JSON.stringify(response));
+					console.log("success");
+					
+					// Validamos la respuesta
+                    if (response.status == 'ok') {
+
+                        swal(
+                            'Gracias...',
+                            '\u00a1Tu mensaje ha sido enviado!',
+                            'success'
+                        ).catch(swal.noop).then(function (result) {
+                        	//console.log("termine");
+                        	// Rediigimos
+                        	window.location.href = $basePath + '/';
+
+                        });
+                       
+                    } else {
+                        swal(
+                            'Opsss..',
+                            '\u00a1Ocurrio un error, intentalo de nuevo!',
+                            'error'
+                        ).catch(swal.noop);
+                    }
+
+				})
+				.fail(function() {
+					swal(
+                    	'Opsss..',
+                    	'\u00a1Ocurrio un error, intentalo de nuevo!',
+                    	'error'
+                	).catch(swal.noop);
+				})
+				.always(function() {
+					console.log("complete");
+				});
+
+			}
+		});
+		
+	});
+
+	</script>
+	
+</body>
+</html>

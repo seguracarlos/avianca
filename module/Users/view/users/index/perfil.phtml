@@ -1,0 +1,215 @@
+<link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+<br><br><br><br>
+<center>
+
+
+
+<div class="row">
+
+<div class="col s12 m12 l12 left-align" style="margin-bottom: 20px;">
+				<h3 class="grey-text text-darken-2 text-architects-daughter">Mi Perfil</h3><br>
+			</div>
+
+			<div class="col s12 m8 offset-m2 l6 offset-l4">
+        
+          <div class="row valign-wrapper">
+            <div class="col s8">
+              <img src="<?php echo 'data:image/jpg;base64,' . $this->perfil["image"]; ?>" style="width: 100%; height: 100%;" alt="imagen de perfil" class="responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              
+            </div>
+          </div>
+       
+      </div>
+					
+					<!--<div class="file-field input-field col s12 m6 l6">
+
+	      				<div id="container_image" class="center z-depth-4" style="height: 300px; width: 300px; margin: auto auto 2rem;">
+	      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image" src="<?php echo 'data:image/jpg;base64,' . $this->perfil["image"]; ?>">	
+	      				</div>
+
+	    			</div>-->
+	    			</div>
+
+
+
+
+
+<div class="row">
+
+        <div class="col s12 m12 l12">
+          <div class="card">
+            <div class="card-content">
+            <div class="col s12 m12 l12">	
+		<table id="table_users" class="bordered striped highlight responsive-table">
+
+            <thead>
+				<tr>
+					<th>  Mis Datos personales</th>
+					
+				</tr>
+			</thead>
+
+
+			<tbody>
+		
+				
+					<!--<td><?php echo $this->perfil["id"]; ?></td></tr> -->
+
+					<tr><th data-field="nombre">Nombre</th> 
+					<td><?php echo $this->perfil["name"]; ?></td></tr>
+
+					<tr><?php if($this->type_perfil == 2) : ?>
+					<th data-field="campus">Campus o sucursal</th>
+					<td><?php echo $this->perfil["campus"]; ?></td></tr>
+					<?php  endif; ?>
+
+					<tr><?php if($this->type_perfil == 1) : ?>
+					<th data-field="surname">Apellidos</th>
+					<td><?php echo $this->perfil["surname"]; ?></td></tr>
+					<?php  endif; ?>
+
+					<tr><th data-field="phone">Teléfono</th>
+					<td><?php echo $this->perfil["phone"]; ?></td></tr>
+
+					<tr> <?php if($this->type_perfil == 2) : ?>
+					<th data-field="addres">Dirección</th>
+					<td><?php echo $this->perfil["addres"]; ?></td></tr>
+					<?php  endif; ?>
+
+					
+
+										
+				
+			<?php  ?>
+			</tbody>
+			</table>
+
+	</div>
+ <div class="card-action">
+ <a class="waves-effect waves-light btn"  href="<?php echo $this->basePath() . '/users/editperfil/'. $perfil["id"];; ?>">Editar mi perfil</a>
+             	<!-- <a  href="<?php echo $this->basePath() . '/users/editperfil/'. $perfil["id"];; ?>">Editar mi perfil</a>-->
+            </div>
+
+            </div>
+           
+          </div>
+
+        </div>
+
+      </div>
+      </center>
+
+
+      </div>
+
+
+
+
+<script>
+
+// VALOR DE LA IMAGEN 
+var $image = "<?php echo $this->image; ?>";
+//console.log($image);
+
+// ***********************************************************************
+// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+// ***********************************************************************
+$(document)
+	.ajaxStart(function () {
+		console.log("Inicia Ajax");
+
+		// Iniciamos panel de carga
+		$.LoadingOverlay("show");
+	})
+	.ajaxStop(function () {
+		console.log("Termina Ajax");
+
+		// ocultamos panel de carga
+		$.LoadingOverlay("hide");
+	});
+
+// ***********************************************************************
+// Cuando el documento esta listo
+// ***********************************************************************
+/*$(document).ready(function() {
+
+    	$('#table_users').DataTable({
+      		"language": {
+            	"sProcessing":     "Procesando...",
+            	"sLengthMenu":     "Mostrar _MENU_ registros",
+            	"sZeroRecords":    "No se encontraron resultados",
+            	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+            	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            	"sInfoPostFix":    "",
+            	"sSearch":         "Buscar:",
+            	"sUrl":            "",
+            	"sInfoThousands":  ",",
+            	"sLoadingRecords": "Cargando...",
+            	"oPaginate": {
+            	    "sFirst":    "Primero",
+            	    "sLast":     "Último",
+            	    "sNext":     "Siguiente",
+            	    "sPrevious": "Anterior"
+            	},
+            	"oAria": {
+            	    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            	    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            	}
+			},
+			"columnDefs" : [{
+      			//"targets": [ 6, 7, 8 ],
+      			//"orderable": false
+    		}]
+	    });
+
+    	$("select").val('10'); //seleccionar valor por defecto del select
+		$('select').addClass("browser-default"); //agregar una clase de materializecss de esta forma ya no se pierde el select de numero de registros.
+		$('select').material_select(); //inicializar el select de materialize
+
+} );*/
+
+// ***********************************************************************
+// CARGAR IMAGENES DE ARTICULOS SI ES QUE EXITEN
+// ***********************************************************************
+if ($image != '') {
+	// CARGAMOS UNA IMAGEN
+	$("#preview_image").attr('src',''+$image);
+};
+
+// ***********************************************************************
+// FUNCION CARGAR IMAGEN DE PERFIL
+// ***********************************************************************
+function previewImgPerfil(input, img_perfil) {
+
+	if (typeof (FileReader) != "undefined") {
+
+		var image_preview = $("#"+img_perfil);
+
+		// Limpiar img preview
+		image_preview.empty();
+
+		var reader = new FileReader();
+
+	    reader.onload = function (e) {
+	        image_preview.attr('src', e.target.result);
+	    }
+	    
+	    //image_holder.show();
+	    reader.readAsDataURL(input.files[0]);
+
+	} else {
+	    alert("Este navegador no admite FileReader.");
+	}
+}
+
+		
+		
+</script>

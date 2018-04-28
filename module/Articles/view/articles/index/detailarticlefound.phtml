@@ -1,0 +1,230 @@
+ <style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+.container_img_art img {
+    /*width: 150px;
+    height: 150px;*/
+    /*border-radius: 150px;*/
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    /*border: 4px solid #ccc;*/
+}
+</style>
+
+<div class="row">
+
+	<div class="col s12 m12 l12" style="margin-bottom: 35px;">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Detalle del art&iacute;culo</h3>
+	</div>
+
+	<div class="col s12 m12 l12" style="margin-bottom: 60px;">
+		<a class="waves-effect waves-light btn-large orange tooltipped" data-position="bottom" data-delay="50" data-tooltip="Regresar" href="<?php echo $this->basePath('/articles/findarticles'); ?>">
+			<i class="material-icons left">replay</i> Regresar
+		</a>
+	</div>
+
+	<div class="col s12 m12 l12">
+		<div class="card-panel">
+
+			
+			<div class='circle-icon'>
+				<i class="material-icons">description</i>
+			</div>
+
+			<div class="row"> 
+
+				<div class="col s12 m12 l12"><br>
+					<h4 class="grey-text text-darken-2 center-align"><?php echo ($this->article["name_article_two"] != '') ? "Artículo: " . $this->article["name_article_two"] : "Artículo: " . $this->article["name_article"]; ?></h4>
+				</div>
+
+			</div>
+
+			<div class="row">
+				
+				<div class="col s12 m6 l6 center container_img_art">
+					<?php
+					$imagenDefault = $this->basePath('img/icon_article_real.png');
+
+					$imagenFull = '';
+
+					if ($this->article["image_name"] != '') {
+						//$imagenFull = 'data:image/jpg;base64,' . $this->article["image_name"];
+						$imagenFull = $this->basePath('images/articles/' . $this->article["image_name"]);
+					} else {
+						$imagenFull = $imagenDefault;
+					}
+					?>
+					<img class="z-depth-2 materialboxed responsive-img" src="<?php echo $imagenFull; ?>" alt="articulo" style="height: 300px; width: auto;" />
+				</div>
+				<div class="col s12 m6 l6 center container_img_art">
+					<?php
+					$imagenDefault2 = $this->basePath('img/icon_article_real.png');
+
+					$imagenFull2 = '';
+
+					if ($this->article["image_name_two"] != '') {
+						//$imagenFull2 = 'data:image/jpg;base64,' . $this->article["image_name_two"];
+						$imagenFull2 = $this->basePath('images/articles/' . $this->article["image_name_two"]);
+					} else {
+						$imagenFull2 = $imagenDefault2;
+					}
+					?>
+					<img class="z-depth-2 materialboxed responsive-img" src="<?php echo $imagenFull2; ?>" alt="articulo" style="height: 300px; width: auto;">
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Asignado a:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo ($this->article["asignated_to"] != "") ? $this->article["asignated_to"] : "Sin asignar"; ?></h5>
+				</div>
+				
+			</div>
+
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Categoria:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo $this->article["name_category"]; ?></h5>
+				</div>
+				
+			</div>
+
+			<?php if($this->article["id_category"] == 1 && $this->article["clothes_size"] != "") : ?>
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Talla:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<?php
+
+					$clothes_size = "";
+
+					switch ($this->article["clothes_size"]) {
+					 	case 1:
+					 		$clothes_size = "Chica";
+					 		break;
+					 	case 2:
+					 		$clothes_size = "Mediana";
+					 		break;
+					 	case 3:
+					 		$clothes_size = "Grande";
+					 		break;
+					 	case 4:
+					 		$clothes_size = "Extra Grande";
+					 		break;
+					 	default:
+					 		$clothes_size = "Sin asignar";
+					 		break;
+					 } 
+					?>
+					<h5 class="grey-text"><?php echo $clothes_size; ?></h5>
+				</div>
+				
+			</div>
+
+			<?php endif; ?>
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Marca:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo $this->article["brand"]; ?></h5>
+				</div>
+				
+			</div>
+			 
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Color:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo $this->article["name_color"]; ?></h5>
+				</div>
+				
+			</div>
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Modelo / N&uacute;mero de serie:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo $this->article["model_serie"]; ?></h5>
+				</div>
+				
+			</div>
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text"> Recompensa $: </h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo $this->article["reward"]; ?></h5>
+				</div>
+				
+			</div>
+
+			<div class="row">
+
+				<div class="col s12 m3 l3">
+					<h5 class="grey-text">Descripci&oacute;n:</h5>
+				</div>
+
+				<div class="col s12 m9 l9">
+					<h5 class="grey-text"><?php echo $this->article["description"]; ?></h5>
+				</div>
+				
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<!--<div class="fixed-action-btn">
+	<a class="btn-floating btn-large yellow tooltipped" href="<?php echo $this->basePath('/articles'); ?>" data-position="left" data-delay="50" data-tooltip="Volver">
+		<i class="large material-icons">replay</i>
+	</a>
+</div>-->
+
+
+<script>
+	
+$(document).ready(function(){
+	$('.materialboxed').materialbox();
+});
+        
+</script>

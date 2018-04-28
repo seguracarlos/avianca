@@ -1,0 +1,139 @@
+<style>
+#map {
+	height: 500px;
+	width: 100%;
+}
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+	z-index: 900;
+}
+</style>
+
+<div class="row">
+
+	<div class="col s12 m12 l12">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Ubicaci&oacute;n de tu art&iacute;culo</h3><br>
+	</div>
+
+	<div class="col s12 m12 l12" style="margin-bottom: 60px;">
+		<a class="waves-effect waves-light btn-large orange tooltipped" data-position="bottom" data-delay="50" data-tooltip="Regresar" href="<?php echo $this->basePath('/articles/findarticles'); ?>">
+			<i class="material-icons left">replay</i> Regresar
+		</a>
+	</div>
+
+	<div class="col s12 m12 l12">
+	
+		<div class="card-panel">
+
+			<div class='circle-icon'>	
+				<i class="material-icons">location_on</i>   
+			</div>
+
+			<div id="map"></div>
+
+		
+		</div>
+
+	</div>
+
+</div>
+
+
+<!--<div class="fixed-action-btn">
+	<a class="btn-floating btn-large yellow tooltipped" href="<?php echo $this->basePath('/articles'); ?>" data-position="left" data-delay="50" data-tooltip="Volver">
+		<i class="large material-icons">replay</i>
+	</a>
+</div>-->
+
+<script>
+// latitud articulo
+var $latitud_article  = '<?php echo $this->latitude; ?>';
+
+// longitud articulo
+var $longitud_article = '<?php echo $this->longitude; ?>';
+
+// latitud por defecto
+var $latDefaultArt = 19.384415;
+
+// longitud por defecto
+var $lngDefaultArt = -99.167161;
+
+// latitud real
+var $latitudArticleReal  = '';
+
+// longitud real
+
+var $longitudArticleReal = '';
+
+// Validamos si existe ltitud y longitud
+if($latitud_article != '' && $longitud_article != '')
+{
+	$latitudArticleReal  = parseFloat($latitud_article);
+
+	$longitudArticleReal = parseFloat($longitud_article);
+
+} else {
+
+	swal(
+		'Opsss..',
+		'¡Tu artículo no ha sido escaneado!',
+		'info'
+	);
+
+	$latitudArticleReal  = $latDefaultArt;
+
+	$longitudArticleReal = $lngDefaultArt;
+}
+
+//console.log('latitud ' + parseFloat($latitudArticleReal));
+
+//console.log('longitud ' + parseFloat($longitudArticleReal));
+
+// INICIA MAPA
+function initMap() {
+ 	var myLatLng = {lat: $latitudArticleReal, lng: $longitudArticleReal};
+
+  	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 18,
+ 		center: myLatLng
+	});
+
+	var marker = new google.maps.Marker({
+		position: myLatLng,
+		map: map,
+		title: 'Ubicación de tu artículo!'
+	});
+
+	// creamos el objeto geodecoder 
+	var geocoder = new google.maps.Geocoder();
+
+	// le asignamos una funcion al eventos dragend del marcado
+	google.maps.event.addListener(marker, 'click', function() {
+		geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				var address = results[0]['formatted_address'];
+				
+				var infowindow = new google.maps.InfoWindow({
+    				content: address.toString()
+  				});
+				//alert(address);
+				infowindow.open(map, marker);
+
+			}
+		});
+	});
+
+}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVcylsmxNkKzzlLOLEOlaIBa_3V0RuMcw&callback=initMap" async defer></script>
+

@@ -1,0 +1,398 @@
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery.formatCurrency-1.4.0/jquery.formatCurrency-1.4.0.min.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+
+<style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+</style>
+
+<div class="row">
+
+	<div class="col s12 m12 l12 left-align" style="margin-bottom: 35px;">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Registra el art&iacute;culo encontrado</h3><br>
+	</div>
+
+	<div id="container_form_code_qr" class="col s12 m12 l12" style="margin-bottom: 35px;">
+		
+		<div class="card-panel">
+
+			<div class='circle-icon'>
+				<i class="material-icons fa fa-qrcode"></i>
+			</div>
+			
+
+			<?php 
+			$formQR = $this->formQR;
+			$formQR->prepare();
+			echo $this->form()->openTag($formQR);
+			?>
+
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa el codigo que esta en la pegalina.</h4>
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12 m12 l12">
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('code_article')); ?>
+							<label for="code_article">C&oacute;digo</label>
+						</div>
+
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('repeat_code_article')); ?>
+							<label for="repeat_code_article">Repetir C&oacute;digo</label>
+						</div>
+					</div>
+
+
+				</div>
+
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						<div class="col s6 m6 l6">
+							<button type="submit" id="btn_validate_codeQR" class="waves-effect waves-light btn-large teal col s12 m12 l12">Enviar</button>
+							<?php //echo $this->formElement($form->get('submitbutton')); ?>
+						</div>
+
+						<div class="col s6 m6 l6">
+							<a id="btn_cancel_validate_codeQR" href="<?php echo $this->basePath()."/articles/findarticles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($formQR); ?>
+
+		</div>
+
+
+	</div>
+
+	<div class="col s12 m12 l12">
+
+		<div id="container_form_articles" style="display: none;">
+		
+			<div class="card-panel">
+
+				<div class='circle-icon'>	
+					<i class="material-icons">description</i>   
+				</div>
+
+				<?php 
+				$form = $this->form;
+				$form->prepare();
+				echo $this->form()->openTag($form);
+				echo $this->formElement($form->get('id'));
+				echo $this->formElement($form->get('id_register_qr'));
+				?>
+
+					<div class="row">
+						<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos del art&iacute;culo.</h4>
+					</div>
+
+					<div class="row">
+
+						<div class="col s12 m12 l6">
+
+							<div class="input-field col s12 m12 l12" style="display:none;">
+								<input type="text" name="asignated_to" id="asignated_to">
+								<label for="asignated_to">Asignado a:</label>
+							</div>
+							<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('event_articles')); ?>
+							<label for="event_articles">Evento:</label>
+						</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('category')); ?>
+								<label for="category">Categor&iacute;a:</label>
+							</div>
+
+							<div style="display: none;" id="container_clothes_size" class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('clothes_size')); ?>
+								<label for="clothes_size">Talla:</label>
+							</div>
+
+							<div id="container_name_article" class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('name_article')); ?>
+								<label for="name_article">Art&iacute;culo:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('brand')); ?>
+								<label for="brand">Marca:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('color')); ?>
+								<label for="color">Color:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('model_serie')); ?>
+								<label for="model_serie">Modelo / N&uacute;mero de serie:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('reward')); ?>
+								<label for="reward">Recompensa $:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('description')); ?>
+								<label for="description">Descripci&oacute;n:</label>
+							</div>
+
+								<!--<div class="input-field col s12 m6 l6">
+									<input type="hidden" name="type_hs" id="type_hs" class="validate" value="111">
+									<input type="hidden" name="id_status_hs" id="id_status_hs" class="validate" value="7">
+									<input type="hidden" name="id_articles_hs" id="id_articles_hs" class="validate">
+								</div>-->
+
+							
+							<div class="input-field col s12 m6 l6">
+									<input type="text" name="warehouse" id="warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el almac&eacute;n">
+									<label for="warehouse">Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m6 l6">
+								<input type="text" name="phone_warehouse" id="phone_warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el teléfono del almac&eacute;n">
+								<label for="phone_warehouse">Tel&eacute;fono Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<textarea id="comment" class="materialize-textarea" name="comment" data-validetta="required" data-vd-message-required="Ingresa algún comentario"></textarea>
+								<label for="comment">Comentario del almac&eacute;n:</label>
+							</div>
+							
+						</div>
+
+						<div class="col s12 m12 l6">
+
+							<div class="file-field input-field col s12 m12 l12">
+
+			      				<div class="btn">
+			        				<span>Imagen 1</span>
+			        				<!--<input type="file" name="imageone">-->
+			        				<?php echo $this->formElement($form->get('imageone')); ?>
+			      				</div>
+
+			      				<div class="file-path-wrapper">
+			        				<input class="file-path validate" type="text">
+			      				</div>
+
+			      				<div id="container_image_one" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+			      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image_one" src="https://canna-pet.com/wp-content/plugins/ajax-search-pro/img/default.jpg">	
+			      				</div>
+
+			    			</div>
+
+			    			<div class="file-field input-field col s12 m12 l12">
+
+			      				<div class="btn">
+			        				<span>Imagen 2</span>
+			        				<!--<input type="file" name="imagetwo">-->
+			        				<?php echo $this->formElement($form->get('imagetwo')); ?>
+			      				</div>
+
+			      				<div class="file-path-wrapper">
+			        				<input class="file-path validate" type="text">
+			      				</div>
+
+			      				<div id="container_image_two" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+			      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image_two" src="https://canna-pet.com/wp-content/plugins/ajax-search-pro/img/default.jpg">	
+			      				</div>
+
+			    			</div>
+							
+						</div>
+
+					</div>
+
+					<div class="row" style="margin-top: 35px;">
+						
+						<div class="col s12 m12 l12">
+							
+							<div class="col s12 m6 l6">
+								<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+								<?php //echo $this->formElement($form->get('submitbutton')); ?>
+							</div>
+
+
+							<div class="col s12 m6 l6">
+								<a href="<?php echo $this->basePath()."/articles/findarticles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+							</div>
+							
+						</div>
+
+					</div>
+
+				<?php echo $this->form()->closeTag($form); ?>
+
+			</div>
+
+		</div>
+
+		<div id="container_form_articles_found" style="display: none;">
+
+			<div class="card-panel">
+
+				<div class='circle-icon'>	
+					<i class="material-icons">description</i>   
+				</div>
+
+				<form id="form_articles_found">
+
+					<div class="row">
+						<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos que se te solicitan.</h4>
+						<p class="grey-text" style="padding-left: 15px;">Para poder avisar al dueño del art&iacute;culo que fue localizado.</p>
+					</div>
+
+					<div class="row">
+
+						<div class="col s12 m12 l12">
+							<div class="input-field col s12 m6 l6">
+								<input type="hidden" name="type_hs" id="type_hs" class="validate" value="111">
+								<input type="hidden" name="id_status_hs" id="id_status_hs" class="validate" value="7">
+								<input type="hidden" name="id_articles_hs" id="id_articles_hs" class="validate">
+								<input type="hidden" name="id_code_qr" id="id_code_qr" class="validate">
+							</div>
+						</div>
+
+						<div class="col s12 m12 l12">
+
+							<div class="input-field col s12 m6 l6">
+								<input type="text" name="warehouse" id="warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el almac&eacute;n">
+								<label for="warehouse">Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m6 l6">
+								<input type="text" name="phone_warehouse" id="phone_warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el teléfono del almac&eacute;n">
+								<label for="phone_warehouse">Tel&eacute;fono Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<textarea id="comment" class="materialize-textarea" name="comment" data-validetta="required" data-vd-message-required="Ingresa algún comentario"></textarea>
+								<label for="comment">Comentario:</label>
+							</div>
+							
+						</div>
+						
+					</div>
+
+					<div class="row" style="margin-top: 35px;">
+						
+						<div class="col s12 m12 l12">
+								
+							<div class="col s12 m6 l6">
+								<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+							</div>
+
+							<div class="col s12 m6 l6">
+								<a href="<?php echo $this->basePath()."/articles/findarticles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+							</div>
+								
+						</div>
+
+					</div>
+
+				</form>
+				
+			</div>
+			
+		</div>
+
+	</div>
+
+</div>
+
+<script src="<?php echo $this->basePath('/pegalinaslive/js/addarticlefound/addarticlefound.js'); ?>"></script>
+
+<script>
+$(document).ready(function() {
+
+	// ************************************************************************
+	// VALIDAR FORMULARIO DE ARTICULOS
+	// ************************************************************************
+	$form_articles.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/addarticlefound',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(JSON.stringify(response));
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+	        				
+	        				window.location = $basePath + '/articles/findarticles';
+
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        			swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+	});
+
+});
+	
+</script>
+

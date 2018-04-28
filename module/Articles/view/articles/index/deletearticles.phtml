@@ -1,0 +1,317 @@
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<div class="row">
+	
+	<div class="col s12 m12 l12">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Eliminar Art&iacute;culos Encontrados</h3><br>
+	</div>
+
+	<div class="col s12 m6 l6" style="margin-bottom: 20px;">
+
+		<?php if($this->perfil == 2) : ?>
+			<a id="btn_delete_all_articles" class="waves-effect waves-light btn-large red tooltipped" data-position="right" data-delay="50" data-tooltip="Eliminar art&iacute;culos encontrados" href="javascript:void(0)">
+				<i class="material-icons left">delete_sweep</i> Eliminar Articulos
+			</a>
+		<?php endif; ?>
+
+	</div>
+
+	<div class="col s12 m6 l6" style="margin-bottom: 20px;">
+
+		<?php if($this->perfil == 2) : ?>
+			<a class="btn-large waves-effect waves-light indigo darken-1 tooltipped right" data-position="bottom" data-delay="50" data-tooltip="Art&iacute;culos Encontrados" href="<?php echo $this->basePath('/articles/findarticles'); ?>">
+				<i class="material-icons left">description</i> Art&iacute;culos Encontrados
+			</a>
+		<?php endif; ?>
+
+	</div>
+
+	<div class="col s12 m12 l12">
+	
+		<table id="table_articles_found" class="bordered striped highlight responsive-table">
+
+			<thead>
+				<tr>
+					<th>
+						<p>
+                     		<input type="checkbox" id="select_all"/>
+                     		<label for="select_all">Todos</label>
+                   		</p>
+					</th>
+					<th data-field="imgArt">Foto</th>
+					<th data-field="event_articles">Evento</th>				
+					<th data-field="articulo">Art&iacute;culo</th>
+					<th data-field="status">Estatus</th>
+					<th data-field="fecha_encontrado">Fecha Encontrado</th>
+					<th data-field="fecha_devolucion">Fecha de Devoluci&oacute;n</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			<?php foreach($this->articles as $key => $art) : ?>
+				<tr>
+					<td>
+						<p>
+                     		<input type="checkbox" class="checkbox" value="<?php echo $art["id_return"]; ?>" id="article<?php echo $key; ?>" />
+                     		<label for="article<?php echo $key; ?>"></label>
+                   		</p>
+					</td>
+
+					<td>
+					<?php if($art["image_name"] != '' && $art["image_name"] != null) :  ?>
+						<img style="width: 50px; height: 50px" class="" src="<?php echo $this->basePath("images/articles/".$art["image_name"]); ?>" alt="articulo">
+					<?php else : ?>
+						<img style="width: 50px; height: 50px" src="<?php echo $this->basePath('img/icon_article_real.png'); ?>" alt="articulo">
+					<?php endif; ?>
+					</td>
+
+					<td><?php echo $art["event_articles"]; ?></td>
+
+					<td><?php echo ($art["name_article_two"] != '') ? $art["name_article_two"] : $art["name_article"]; ?></td>
+
+					<td>
+					<?php if($art['return_date'] == '' || $art['return_date'] == '0000-00-00 00:00:00' || $art['return_date'] == null) : ?>
+						Encontrado
+					<?php else : ?>
+						Devuelto
+					<?php endif; ?>
+					</td>
+
+					<td><?php echo date("d-m-Y", strtotime($art["date_found"])); ?></td>
+
+					<td>
+					<?php
+
+						// FECHA DE DEVOLUCION
+						$returnDate  = $art["return_date"];
+						
+						// FECHA FINAL
+						$date_return = 'No devuelto';
+
+						// VALIDAMOS SI YA EXISTE UNA FECHA DE DEVOLUCION
+						if ($returnDate != '' && $returnDate != '0000-00-00 00:00:00' && $returnDate != NULL) {
+							$date_return = date("d-m-Y", strtotime($returnDate));
+						}
+
+						// MOSTRAMOS FECHA DE DEVOLUCION
+						echo $date_return;
+
+					?>
+					</td>					
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+
+		</table>
+
+	</div>
+
+</div>
+
+<script>
+
+// ***********************************************************************
+// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+// ***********************************************************************
+$(document)
+	.ajaxStart(function () {
+		//console.log("Inicia Ajax");
+		// Iniciamos panel de carga
+		$.LoadingOverlay("show");
+	})
+	.ajaxStop(function () {
+		//console.log("Termina Ajax");
+		// ocultamos panel de carga
+		$.LoadingOverlay("hide");
+	});
+
+// ***********************************************************************
+// Cuando el documento esta listo
+// ***********************************************************************
+$(document).ready(function() {
+
+	// FUNCION ELIMINAR ARTICULOS SELECCIONADOS
+	$("#btn_delete_all_articles").on('click', function(){
+		
+		// Contador
+		var contador = 0;
+
+		// Array de elementos
+		var dataValCheckbox = [];
+
+		/*$('input[type=checkbox]:checked').each(function() {
+			console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") Seleccionado");
+		});*/
+
+		// Recorremos todos los checkbox para contar los que estan seleccionados
+		$("input.checkbox[type=checkbox]").each(function(){
+			if($(this).is(":checked")) {
+				
+				// Asignar datos al array
+                dataValCheckbox.push({
+                	id_return : $(this).val()
+                });
+
+				contador++;
+			};
+		});
+
+		//console.log("contador: " + contador);
+
+		// VALIDAMOS SI SE SELECCIONO ALGUN CHECKBOX
+		if(contador > 0) {
+
+			// MOSTRAMOS ALERTA
+            swal({
+                title: '¿Estás seguro?',
+				text: "¡Eliminaras todos los articulos seleccionados!",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Aceptar',
+				cancelButtonText: 'Cancelar',
+            }).then(function () {
+
+                //console.log("Eliminar articulos");
+                //console.log("dataValCheckbox: " + JSON.stringify(dataValCheckbox));
+
+                $.ajax({
+					url: $basePath + '/articles/deletearticles',
+					type: 'POST',
+					dataType: 'json',
+					data: {articles : dataValCheckbox},
+				})
+				.done(function(response) {
+					//console.log("success");
+					console.log(JSON.stringify(response));
+					if(response.status == "ok") {
+
+						//console.log("response.data.length: " + response.data.length);
+
+						let numberArticles = response.data.length;
+						let msgArticles    = "";
+
+						// Validamos el numero de articulos eliminados
+						if(numberArticles > 1) {
+							msgArticles = '¡Los ' + numberArticles + ' articulos seleccionados se eliminaron correctamente!';
+						} else {
+							msgArticles = '¡El artículo seleccionado se elimino correctamente!';
+						};
+
+						swal(
+			  				'Correcto',
+			  				msgArticles,
+			  				'success'
+						).catch(swal.noop).then(function () {
+							// Recargamos la pagina
+							location.reload();
+						});
+
+					} else {
+						swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+					};
+
+				})
+				.fail(function() {
+					swal(
+			  			'Opsss..',
+			  			'¡Ocurrio un error intentalo de nuevo!',
+			  			'error'
+					).catch(swal.noop);
+				})
+				.always(function() {
+					//console.log("complete");
+				});
+
+
+            }, function (dismiss) {
+
+            	//console.log("No eliminar articulos");
+
+            	//dataValCheckbox.length = 0;
+
+            });
+
+		} else {
+
+			// Mostramos alerta
+			swal(
+		  		'Atención',
+		  		'¡No hay artículos seleccionados!',
+		  		'info'
+			).catch(swal.noop);
+
+		};
+
+	});
+
+	// SELLECCIONAR TODOS LOS CHECKBOX
+	$('#select_all').on('click',function() {
+		if(this.checked){
+            $('.checkbox').each(function() {
+            	this.checked = true;
+            });
+		} else {
+ 			$('.checkbox').each(function() {
+            	this.checked = false;
+        	});
+        }
+	});
+    
+    // SELECCIONAR UN CHECKBOX INDIVIDUALMENTE
+    $('.checkbox').on('click',function() {
+    	if($('.checkbox:checked').length == $('.checkbox').length) {
+            $('#select_all').prop('checked',true);
+        }else{
+            $('#select_all').prop('checked',false);
+        }
+	});
+
+	// ******************************************************************
+	// PLUGIN DATA TABLE JQUERY
+	// ******************************************************************
+	$('#table_articles_found').DataTable({
+      	"language": {
+          	"sProcessing":     "Procesando...",
+           	"sLengthMenu":     "Mostrar _MENU_ registros",
+           	"sZeroRecords":    "No se encontraron resultados",
+           	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+           	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+           	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+           	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+           	"sInfoPostFix":    "",
+           	"sSearch":         "Buscar:",
+           	"sUrl":            "",
+           	"sInfoThousands":  ",",
+           	"sLoadingRecords": "Cargando...",
+           	"oPaginate": {
+           	    "sFirst":    "Primero",
+           	    "sLast":     "Último",
+           	    "sNext":     "Siguiente",
+           	    "sPrevious": "Anterior"
+           	},
+           	"oAria": {
+           	    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+           	    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+           	}
+		},
+		"columnDefs" : [{
+      		"targets": [ 0 ],
+      		"orderable": false
+    	}]
+	});
+
+	$("#table_articles_found_length select").val('10'); //seleccionar valor por defecto del select
+	$('#table_articles_found_length select').addClass("browser-default"); //agregar una clase de materializecss de esta forma ya no se pierde el select de numero de registros.
+	$('select').material_select(); //inicializar el select de materialize
+
+});
+
+</script>

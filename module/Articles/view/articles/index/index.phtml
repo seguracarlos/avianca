@@ -1,0 +1,510 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<div class="row">
+	
+	<div class="col s12 m12 l12">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Mis Artículos</h3><br>
+	</div>
+
+	<div class="col s12 m6 l6" style="margin-bottom: 20px;">
+
+		<a class="waves-effect waves-light btn-large green tooltipped" data-position="bottom" data-delay="50" data-tooltip="Agregar Art&iacute;culo" href="<?php echo $this->basePath('/articles/add'); ?>">
+			<i class="material-icons left">add_circle</i> Registrar nuevo artículo
+		</a>
+
+	</div>
+
+	<div class="col s12 m6 l6" style="margin-bottom: 20px;">
+
+		<?php if($this->perfil == 2) : ?>
+			<a class="btn-large waves-effect waves-light indigo darken-1 tooltipped right" data-position="bottom" data-delay="50" data-tooltip="Art&iacute;culos Encontrados" href="<?php echo $this->basePath('/articles/findarticles'); ?>">
+				<i class="material-icons left">description</i> Art&iacute;culos Encontrados
+			</a>
+		<?php endif; ?>
+
+	</div>
+
+	<!--<div class="col s12 m12 l6 right-align">-->
+
+		<!--<a style="margin-top: 15px;" class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="left" data-delay="50" data-tooltip="Agregar Art&iacute;culo" href="<?php //echo $this->basePath('/articles/add'); ?>">
+			<i class="material-icons">add</i>
+		</a>-->
+	<!--</div>-->
+
+	<div class="col s12 m12 l12">
+	
+		<table id="table_articles" class="bordered striped highlight responsive-table">
+
+			<thead>
+				<tr>
+					<th data-field="imgArt">Foto</th>
+					<th data-field="id">Asignado a</th>
+					<!--<th data-field="event_articles">Evento</th>	-->				
+					<th data-field="category">Categor&iacute;a</th>
+					<th data-field="nombre">Artículo</th>
+					<!--<th data-field="descripcion">Descripci&oacute;n</th>-->
+					<th data-field="color">Color</th>
+					<th data-field="marca">Marca</th>
+					
+					<th data-field="status">Estatus</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+			<?php foreach($this->articles as $art) : ?>
+				<tr>
+					<td>
+					<?php if($art["image_name"] != '' && $art["image_name"] != null) :  ?>
+						<img style="width: 50px; height: 50px" class="" src="<?php echo $this->basePath("images/articles/".$art["image_name"]); ?>" alt="articulo">
+					<?php else : ?>
+						<img style="width: 50px; height: 50px" src="<?php echo $this->basePath('img/icon_article_real.png'); ?>" alt="articulo">
+					<?php endif; ?>
+					</td>
+					<td>
+						<p class="truncate"><?php echo $art["asignated_to"]; ?></p>
+					</td>
+					<!--<td><?php echo $art["event_articles"]; ?>-->
+					<td><?php echo $art["name_category"]; ?></td>
+					<td><?php
+						/*if($art["name_article_two"] != ''){
+							echo $art["name_article_two"];
+						} else {
+							echo $art["name_article"];
+						}*/
+						
+						echo ($art["name_article_two"] != '') ? $art["name_article_two"] : $art["name_article"]; 
+					?></td>
+					<!--<td><?php //echo $art["description"]; ?></td>-->
+					<td><?php echo $art["name_color"]; ?></td>
+					<td><?php echo $art["brand"]; ?></td>
+					<td>
+
+						<?php
+							switch ($art["name_status"]) {
+								case 'Asignado':
+									$color = 'teal';
+									break;
+								case 'Prestado':
+									$color = 'blue';
+									break;
+								case 'Extraviado':
+									$color = 'red';
+									break;
+								default:
+									$color = 'green';
+									break;
+							}
+						?>
+						
+						<!--<span class="white-text badge <?php //echo $color; ?>"><?php //echo $art["name_status"]; ?></span>-->
+						<select name="id_status" class="id_status" data-idarti="<?php echo $art['id']; ?>" data-codeqr="<?php echo $art['id_register_qr']; ?>">
+     	 					<option value="2" <?php echo ($art['id_status'] == 2) ? 'selected' : '' ?>>Registrado</option>
+      						<option value="3" <?php echo ($art['id_status'] == 3) ? 'selected' : '' ?>>Prestado</option>
+      						<option value="4" <?php echo ($art['id_status'] == 4) ? 'selected' : '' ?>>Extraviado</option>
+      						<option value="6" disabled <?php echo ($art['id_status'] == 6) ? 'selected' : '' ?>>Devuelto</option>
+							<option value="7" disabled <?php echo ($art['id_status'] == 7) ? 'selected' : '' ?>>Encontrado</option>
+    					</select>
+					</td>
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating teal tooltipped" data-position="left" data-delay="50" data-tooltip="Detalle Art&iacute;culo" href="<?php echo $this->basePath('/articles/detail/') . $art["id"]; ?>">				
+      						<i class="material-icons">description</i>
+						</a>
+					</td>
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Editar Art&iacute;culo" href="<?php echo $this->basePath('/articles/edit/') . $art["id"]; ?>">				
+      						<i class="material-icons">mode_edit</i>
+						</a>
+					</td>
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Eliminar Art&iacute;culo" href="<?php echo $this->basePath('/articles/delete/') . $art["id_register_qr"]; ?>">
+							<i class="material-icons">delete</i>
+						</a>
+					</td>
+					<td class="center">
+						<a class="waves-effect waves-light btn-floating amber tooltipped" data-position="left" data-delay="50" data-tooltip="Ver Mapa" href="<?php echo $this->basePath('/articles/see-map/') . $art["id"]; ?>" >
+							<i class="material-icons">location_on</i>
+						</a>
+					</td>
+					
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+
+		</table>
+
+	</div>
+
+	<!--<div class="col s12 m12 l12 right-align" style="margin-top: 20px;">
+		
+	</div>-->
+
+
+</div>
+
+<!--<div class="fixed-action-btn">
+	<a class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="left" data-delay="50" data-tooltip="Agregar Art&iacute;culo" href="<?php //echo $this->basePath('/articles/add'); ?>">
+		<i class="material-icons">add</i>
+	</a>
+</div>-->
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+	<div class="modal-content">
+		<h4>Prestar art&iacute;culo</h4>
+		<p>Ingresa los datos de a quien le prestas tu art&iacute;culo</p>
+		
+		<div class="row">
+			<form id="form_lend_article" class="col s12">
+
+				<input id="id_status_lend" type="hidden">
+				<input id="id_articles_lend" type="hidden">
+				<input id="id_register_qr_lend" type="hidden">
+      
+				<div class="row">
+        			<div class="input-field col s6">
+          				<input id="first_name_lend" type="text" class="validate">
+          				<label for="first_name_lend">Nombre</label>
+        			</div>
+        			<div class="input-field col s6">
+          				<input id="last_name_lend" type="text" class="validate">
+          				<label for="last_name_lend">Apellidos</label>
+        			</div>
+      			</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="descrip_lend" class="materialize-textarea"></textarea>
+						<label for="descrip_lend">Descripci&oacute;n</label>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+	<div class="modal-footer">
+		<a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+		<a href="javascript:void(0)" id="btn_lend_article" class="waves-effect waves-green btn-flat">Aceptar</a>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+        <!-- Modal articulo extraviado Structure -->
+    
+    <div id="modal_article_lost" class="modal" style="max-height: 84% !important;">
+    <div class="modal-content" style="padding-bottom: 4px !important;">
+        <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s12 m2 l2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s12 m10 l10">
+        <h4 class="center-align">Parece que extraviaste un art&iacute;culo</h4>
+        </div>
+        </div>
+        
+        <p class="center-align">Envia un correo electr&oacute;nico a un conocido para que te ayude a encontrarlo.</p>
+        <div class="row" style="margin-top: 20px;">
+            <form id="form_article_found" method="POST" action="#" class="col s12 m12 l12">
+
+                <input type="hidden" id="id_article" name="id_article">
+                <input type="hidden" id="id_code_qr" name="id_code_qr">
+                <input type="hidden" id="email_owner" name="email_owner">
+
+                <div class="row">
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="email_p" type="text" class="validate" name="email_p" data-validetta="required" data-vd-message-required="Ingresa tu correo electrónico" />
+                        <label for="email_p">Correo Electr&oacute;nico de la persona que quieres notificar el extravio</label>
+                    </div>
+           
+                    <div class="input-field col s12 m12 l12">                   
+                        <textarea id="comment_p" class="materialize-textarea" name="comment_p" data-validetta="required" data-vd-message-required="Ingresa algún comentario">Hola, extravie mi artículo ayudame a encontrarlo.!</textarea>
+                        <label for="comment_p">Comentario</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <button type="submit" class="waves-effect waves-light btn-large teal col s12 m12 l12">
+                            <!--<i class="material-icons left">send</i>--> Enviar
+                        </button>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <a href="javascript:void(0)" id="btn_close_modal_article_found" class="waves-effect waves-light btn-large red col s12">Cerrar</a>
+                    </div>  
+
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!--<div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>-->
+</div>
+
+
+
+
+
+
+
+<script>
+
+	// BasePath
+	var $basePath = '<?php echo $this->basePath(); ?>';
+
+	// Combo estatus
+	var $select_status = $(".id_status");
+
+	// Boton btn_lend_article
+	var $btn_lend_article    = $("#btn_lend_article");
+
+	// Input nombre de a quien se le presta un articulo
+	var $first_name_lend    = $("#first_name_lend");
+
+	// Input apellido de a quien se le presta un articulo
+	var $last_name_lend     = $("#last_name_lend");
+
+	// Input descripcion de a quien se le presta un artiulo
+	var $descrip_lend       = $("#descrip_lend");
+
+	// input_lend_article Se va a guardar el json con los datos de a quien se le presta un articulo
+	var $input_lend_article = $("#input_lend_article");
+
+	// ***********************************************************************
+	// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+	// ***********************************************************************
+	$(document)
+		.ajaxStart(function () {
+			//console.log("Inicia Ajax");
+			// Iniciamos panel de carga
+			$.LoadingOverlay("show");
+		})
+		.ajaxStop(function () {
+			//console.log("Termina Ajax");
+			// ocultamos panel de carga
+			$.LoadingOverlay("hide");
+		});
+
+	$('select').material_select();
+
+	// ***********************************************************************
+	// Cuando el documento esta listo
+	// ***********************************************************************
+	$(document).ready(function() {
+
+		$('.materialboxed').materialbox();
+
+		// Inicializar modales
+		$('.modal').modal({
+			dismissible: false
+		});
+
+
+    	$('#table_articles').DataTable({
+      		"language": {
+            	"sProcessing":     "Procesando...",
+            	"sLengthMenu":     "Mostrar _MENU_ registros",
+            	"sZeroRecords":    "No se encontraron resultados",
+            	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+            	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            	"sInfoPostFix":    "",
+            	"sSearch":         "Buscar:",
+            	"sUrl":            "",
+            	"sInfoThousands":  ",",
+            	"sLoadingRecords": "Cargando...",
+            	"oPaginate": {
+            	    "sFirst":    "Primero",
+            	    "sLast":     "Último",
+            	    "sNext":     "Siguiente",
+            	    "sPrevious": "Anterior"
+            	},
+            	"oAria": {
+            	    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            	    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            	}
+			},
+			"columnDefs" : [{
+      			"targets": [ 7, 8, 9, 10 ],
+      			"orderable": false
+    		}]
+	    });
+
+	    $("#table_articles_length select").val('10'); //seleccionar valor por defecto del select
+		$('#table_articles_length select').addClass("browser-default"); //agregar una clase de materializecss de esta forma ya no se pierde el select de numero de registros.
+		//$('select').material_select(); //inicializar el select de materialize
+
+		// Cambio en el combo status
+		$select_status.on('change', function(event) {
+			event.preventDefault();
+			
+			// Valor del combo
+			var statusArticle = $(this).val();
+
+			var $dataCodeQR   = $(this).data('codeqr');
+
+			var $dataIdArti   = $(this).data('idarti');
+			//alert($dataCodeQR); fvxe;
+
+			//alert($('#id_status option:selected').html())
+			if ($(this).val() == 3) {
+
+				$("#id_status_lend").val(statusArticle);
+
+				$("#id_articles_lend").val($dataIdArti);
+
+				$("#id_register_qr_lend").val($dataCodeQR);
+
+				$first_name_lend.val('').blur();
+				$last_name_lend.val('').blur();
+				$descrip_lend.val('').blur();
+
+				$('#modal1').modal('open');
+
+				/*if ($statusArticle == 3) {
+					// Mostramos el modal
+					//$('#modalInfoLendArticle').modal('open');
+					swal(
+						'Atención..',
+						'¡Este artículo esta prestado. Cambia el estatus y guarda para volver a prestarlo!',
+						'info'
+					);
+				} else {
+					// Mostramos el modal
+					$('#modal1').modal('open');
+				}*/
+				
+			} else {
+				swal({
+				  title: '¿Estás seguro?',
+				  text: "Actualizaras el estatus del artículo!",
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Aceptar',
+				  cancelButtonText: 'Cancelar',
+				  //confirmButtonClass: 'btn btn-success',
+				  //cancelButtonClass: 'btn btn-danger',
+				  //buttonsStyling: false
+				}).then(function () {
+					$.ajax({
+		        			url: $basePath + '/articles/updatestatus',
+		        			type: 'POST',
+		        			dataType: 'json',
+		        			data: {id : $dataCodeQR, id_status: statusArticle }
+					})
+					.done(function(response) {
+		        			console.log(response);
+		        			//console.log("success");
+		        			if (response.status == 'ok') {
+		        				//window.location = $basePath + '/articles';
+		        				Materialize.toast('Estatus actualizado!', 4000);
+		        			} else if(response.status == 'fail'){
+		        				swal(
+				  					'Opsss..',
+				  					'¡Ocurrio un error intentalo de nuevo!',
+				  					'error'
+								);
+		        			}
+
+					})
+					.fail(function() {
+						console.log("error");
+					})
+					.always(function() {
+						console.log("complete");
+					});
+				}, function (dismiss) {
+					// dismiss can be 'cancel', 'overlay',
+					// 'close', and 'timer'
+					if (dismiss === 'cancel') {
+				    	swal(
+					      	'Cancelado',
+					      	'No actualizaste el estatus del artículo',
+					      	'error'
+				    	)
+					}
+				});
+			}
+
+		});
+
+		$btn_lend_article.on('click', function(event) {
+			event.preventDefault();
+			
+			var $data_lend_article = [];
+
+			// Llenamos el array co datos
+			$data_lend_article.push({
+				'id_status'       : $('#id_status_lend').val(),
+				'id_articles'     : $('#id_articles_lend').val(),
+				'id_register_qr'  : $('#id_register_qr_lend').val(),            
+				'first_name_lend' : $first_name_lend.val(),
+				'last_name_lend'  : $last_name_lend.val(),
+				'descrip_lend'    : $descrip_lend.val()
+			});
+
+			// Guardamos los datos del json en el campo input_lend_article
+			//$input_lend_article.val(JSON.stringify($data_lend_article));
+
+			// Mostramos el modal
+			//$('#modal1').modal('close');
+			//alert(JSON.stringify($data_lend_article));
+
+			//var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/addhistorystatus',
+	        			type: 'POST',
+	        			dataType: 'json',
+	        			//contentType: false, //importante enviar este parametro en false
+						//processData: false, //importante enviar este parametro en false
+	        			data: {dataForm: JSON.stringify($data_lend_article)},
+	        		})
+	        		.done(function(response) {
+	        			console.log(response);
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+	        				//window.location = $basePath + '/articles';
+	        				$('#modal1').modal('close');
+	        				Materialize.toast('Estatus actualizado!', 4000);
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+		});
+
+
+	} );
+</script>
