@@ -32,10 +32,15 @@
     <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
 <style>
-.pets i {
-    color: #FF1E73;
+.list i {
+    color: #d32f2f;
 }
-
+.perfil i {
+    color: #d32f2f;
+}
+.salir i {
+    color: #d32f2f;
+}
 </style>
 
 </head>
@@ -47,21 +52,21 @@
             <nav class="white">
                 <div class="nav-wrapper container">
                     <a href="javascript:void(0);" class="brand-logo">
-                        <img src="<?php echo $this->basePath('img/Recupera by 667x152px.png'); ?>" alt="logo recupera" />
+                        <img src="<?php echo $this->basePath('img/logo_avianca.PNG'); ?>" alt="logo recupera" />
                     </a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li>
-                            <a data-keysecure="perfil" class="btn_validate_articles" href="<?php echo $this->basePath('/users/perfil'); ?>"><i class="material-icons left">account_circle</i>Mi Perfil</a>
+                            <a data-keysecure="perfil" class="btn_validate_articles perfil" href="<?php echo $this->basePath('/users/perfil'); ?>"><i class="material-icons left">account_circle</i>Mi Perfil</a>
                         </li>
                         <li>
-                            <a data-keysecure="articles" class="btn_validate_articles" href="javascript:void(0);"><i class="material-icons left">list</i>Art&iacute;culos</a>
+                            <a data-keysecure="articles" class="btn_validate_articles list" href="javascript:void(0);"><i class="material-icons left">list</i>Art&iacute;culos</a>
                         </li>
                         <!--<li class="item_pet">
                             <a data-keysecure="pets" class="btn_validate_articles pets" href="javascript:void(0);"><i class="material-icons left">pets</i>Mascotas</a>
                         </li>-->
                         <li>
-                            <a href="<?php echo $this->basePath('/auth/logout'); ?>"><i class="material-icons left">power_settings_new</i>Salir</a>
+                            <a class="btn_validate_articles salir" href="<?php echo $this->basePath('/auth/logout'); ?>"><i class="material-icons left">power_settings_new</i>Salir</a>
                         </li>
                     </ul>
                 </div>
