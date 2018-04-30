@@ -1031,6 +1031,97 @@ class IndexController extends BaseController
         return $view;
     }
 
+
+     /**
+     * CUANDO UN ARTICULO ES ESCANEADO
+     */
+    public function encodeqrAction()
+    {
+        //echo "string"; exit();
+        $view    = new ViewModel();
+        $view->setTerminal(true);
+        //$view->setTerminal(true);
+        $request = $this->getRequest();
+        $codeQR  = $this->params()->fromRoute("id",null);
+       
+        // VALIDAMOS EL TIPO DE PETICION
+        if ($request->isPost()) {
+            
+            // DATOS RECIBIDOS POR POST
+            $formData = $request->getPost()->toArray();
+            //echo "<pre>"; print_r($formData); exit;
+
+            //$data_article_decode = json_decode($formData['data_article'], true);
+            //echo "<pre>"; print_r($data_article_decode); exit;
+
+            //$idCodeQR    = $data_article_decode['id'];
+
+            $idCodeQR    = $formData['id_code_qr'];
+            
+            $valueStatus = 7; 
+
+            // CAMBIAMOS EL ESTATUS DEL ARTICLE
+            $updateStatusCodeQR = $this->getCodeQRService()->updateStatusCodeQR($idCodeQR, $valueStatus);
+            //echo "<pre>"; print_r($updateStatusCodeQR); exit;
+
+            // VALIDAMOS SI SE ACTUALIZO EL STATUS
+            if ($updateStatusCodeQR) {
+                 
+                // AGREGAMOS UN REGISTRO EN LA TABLA DE HISTORY STATUS
+                //$addHistoryStatus = $this->getHistoryStatusService()->addHistoryStatus($formData);
+                //echo "<pre>"; print($addHistoryStatus); exit;
+
+                // ENVIO DE CORREO
+                $sendEmail = $this->getArticlesService()->sendEMailArticleFound($formData);
+                //echo "<pre>"; print_r($sendEmail); exit;
+
+                $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                    "status" => 'ok',
+                )));
+
+            }
+
+            return $response;
+            
+        }
+        
+        $articleByCodeQr  = $this->getArticlesService()->getArticleByCodeQr($codeQR);
+        //echo "<pre>"; print_r($articleByCodeQr); exit;
+
+        // Validamos el codigo qr
+        $validateCodeQR = $this->getCodeQRService()->verifyCodeQrUniqueExists($codeQR);
+        //echo "<pre>"; print_r($validateCodeQR); exit;
+
+        // VALIDAMOS SI EL CODIGO EXISTE
+        if ($validateCodeQR[0]['count'] == 1) {
+
+            // VALIDAMOS EL TIPO DEL CODIGO QR
+            if ($validateCodeQR[0]['type_qr'] == 1) {
+
+                // VALIDAMOS EL ESTATUS Y EL ID DEL ARTICULO
+                if ($validateCodeQR[0]['id_status'] == 1 || $validateCodeQR[0]['id_article'] == -1) {
+                    // Redirigimos al inicio
+                    return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
+                }
+
+            } else if ($validateCodeQR[0]['type_qr'] == 2) {
+
+                $urlPet = $this->getRequest()->getBaseUrl() . "/pets/codeqr/" . $codeQR;
+                //print_r($urlPet); exit;
+                // Redirigimos al inicio
+                return $this->redirect()->toUrl($urlPet);
+            }
+
+        } else if ($validateCodeQR[0]['count'] == 0) {
+            // Redirigimos al inicio
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/');
+        }
+
+        $view->setVariables(array('validateCodeQR' => json_encode($validateCodeQR[0])));
+
+        return $view;
+    }
+
     /**
      * GUARDAR UBICACION DEL ARTICULO
      */
