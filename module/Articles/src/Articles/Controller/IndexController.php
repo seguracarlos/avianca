@@ -952,6 +952,17 @@ class IndexController extends BaseController
         //$view->setTerminal(true);
         $request = $this->getRequest();
         $codeQR  = $this->params()->fromRoute("id",null);
+
+        $idioma =substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
+        
+        if($idioma != "es") {
+
+            $urlEn = $this->getRequest()->getBaseUrl() . "/articles/encodeqr/" . $codeQR;
+            
+            // Redirigimos a pagina de ingles traducida
+            return $this->redirect()->toUrl($urlEn);
+
+        }
        
         // VALIDAMOS EL TIPO DE PETICION
         if ($request->isPost()) {
@@ -1043,6 +1054,18 @@ class IndexController extends BaseController
         //$view->setTerminal(true);
         $request = $this->getRequest();
         $codeQR  = $this->params()->fromRoute("id",null);
+
+
+        $idioma =substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
+        
+        if($idioma == "es") {
+
+            $urlEn = $this->getRequest()->getBaseUrl() . "/articles/codeqr/" . $codeQR;
+            
+            // Redirigimos a pagina de ingles traducida
+            return $this->redirect()->toUrl($urlEn);
+
+        }
        
         // VALIDAMOS EL TIPO DE PETICION
         if ($request->isPost()) {
