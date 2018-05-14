@@ -199,8 +199,11 @@
                                   reCAPTCHA DE LOCAL con cuenta cami
 	                             <div class="g-recaptcha" data-sitekey="6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z"></div>
 
-
+								local
 								6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z
+
+								server horus
+								6LdYR1gUAAAAAA7bImYzOWNlFckhL48oGEN_coL5
 
 
 
@@ -211,17 +214,16 @@
 
 	            <div class="row">
 					<div class="col s12 m12 l12">
-						<div style="width: 302px; margin:auto;" class="g-recaptcha" data-sitekey="6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z"></div>
+						<div style="width: 302px; margin:auto;" class="g-recaptcha" data-sitekey="6LdYR1gUAAAAAA7bImYzOWNlFckhL48oGEN_coL5"></div>
 					</div>
 				</div>
 						
 
 				<div class="row">
 					<div class="col s12 m12 l12">
-						<p class="center">
-							
-					
-						       
+						<p class="center">	
+						<input id="condiciones" class="condiciones"  name ="condiciones" type="checkbox" value="1" />
+						<label for="condiciones">				       
 						     
 					    	Al registrarte, aceptas nuestras
                        		<a  href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>" target="_blank">Condiciones</a>
@@ -295,6 +297,9 @@
 	var $container_number_acount  	= $("#container_number_acount");
 	// numero de cuenta
 	var $container_interestingin	= $("#container_interestingin");
+
+	// Variable para almacenar el check
+    var $condiciones    = $("#condiciones");
 
 // ***********************************************************************
 // EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
@@ -492,6 +497,12 @@ $(document).ready(function() {
 				  			'error'
 						).catch(swal.noop);
 	          		} else{
+	          			//alert($("#condiciones").is(':checked'));
+	          		if ($("#condiciones").is(':checked')) {
+	          			// Mostramos alerta
+	          		
+	          		
+	          		// iniciamos peticion
 	          		
 						$.ajax({
 		        			url: $basePath + '/users/register',
@@ -534,12 +545,21 @@ $(document).ready(function() {
 			        		console.log("complete");
 			        	});
 
-		        	}
+		        	}else{
+
+	          			swal(
+				  		'Opsss..',
+				  		'¡Debes de aceptar terminos y condiciones!',
+				  		'warning'
+					).catch(swal.noop);
+	          		}
 
 				}
 
 
 			}
+		}
+
    		});
 });
 </script>
